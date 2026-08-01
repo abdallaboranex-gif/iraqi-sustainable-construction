@@ -11,9 +11,9 @@ def render_header():
         st.session_state.user_identity = {
             "full_name": "المهندس عبد الله عمر الجبوري",
             "rank_title": "مدير مشروع / مهندس استشاري مرخص",
-            "national_id": "199204358112",  # 12 رقم قياسي للبطاقة الموحدة
-            "syndicate_id": "40512",       # رقم الهوية النقابية العراقية [١.١]
-            "days_left": 42,               # العداد الحركي للباقة المشتركة
+            "national_id": "199204358112",
+            "syndicate_id": "40512",
+            "days_left": 42,
             "projects_list": [
                 {"id": 1, "name": "مشروع مجمع اليرموك السكني", "status": "compliant"},
                 {"id": 2, "name": "مشروع برج الكرادة التجاري", "status": "non_compliant"}
@@ -87,11 +87,9 @@ def render_header():
     with col_user:
         st.markdown("<div style='padding-top: 6px;'></div>", unsafe_allow_html=True)
         
-        # صياغة الحاوية العائمة التفاعلية كزر منبثق فخم يحمل الصورة والاسم الغامق مسبقاً
         with st.popover(label="👤  Eng. Abdulla | مدير مشروع", use_container_width=True):
             user_data = st.session_state.user_identity
             
-            # 1. عنوان الهوية وشارات التوثيق السيادي الغامق الحاد ناصع الوضوح
             st.markdown(f"### 👤 {user_data['full_name']}")
             st.markdown(
                 f"""
@@ -107,7 +105,6 @@ def render_header():
                 unsafe_allow_html=True
             )
             
-            # 2. تفاصيل الاشتراك المالي المربوط بالباب الخامس ومحركات الدفع الإلكتروني
             st.markdown("---")
             st.markdown(
                 f"""
@@ -122,7 +119,6 @@ def render_header():
                 unsafe_allow_html=True
             )
             
-            # 3. إدارة التصفير والتنقل اللحظي بين المشاريع الفعالة (Project Switcher)
             st.markdown("#### 🏢 سجل المشاريع الميدانية النشطة:")
             st.markdown("<p style='color: #64748B; font-size: 11px; margin: 0 0 8px 0;'>*اضغط على اسم المشروع لتحديث كافة بوابات الحوكمة وحساباتها فوراً*</p>", unsafe_allow_html=True)
             
@@ -130,19 +126,16 @@ def render_header():
                 status_dot = "🟢" if project["status"] == "compliant" else "🔴"
                 status_txt = "(سليم ومطابق)" if project["status"] == "compliant" else "(موقوف - مخالفة الباب السادس)"
                 
-                # بناء زر حركي لكل مشروع للتنقل السحابي الفوري والمحكم بين العقارات
                 if st.button(
                     label=f"{status_dot} {project['name']} {status_txt}", 
                     key=f"switcher_proj_{project['id']}", 
                     use_container_width=True
                 ):
-                    # تحديث الذاكرة السحابية للعقار بناءً على المشروع الذي تم ضغطه
                     st.session_state.property_data["district"] = "المنصور" if project["id"] == 1 else "الكرادة"
                     st.session_state.property_data["is_compliant"] = True if project["status"] == "compliant" else False
                     st.success(f"🔄 تم الانتقال السحابي الفوري لملف: {project['name']}")
                     st.rerun()
                     
-            # 4. طبقة حماية الخصوصية والتعمية البصرية للأرقام الحساسة البحتة (AES-256)
             st.markdown("---")
             st.markdown("#### 🔐 البيانات السيادية المشفرة للحساب:")
             
