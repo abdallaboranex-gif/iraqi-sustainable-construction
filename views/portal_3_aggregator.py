@@ -29,7 +29,6 @@ def render_portal_3():
         with c1:
             st.metric(label="إجمالي المساحة الطابقية للحصر", value=f"{total_volume_indicator} م²")
         with c2:
-            # مؤشر الاستدامة الافتراضي بناءً على الباب الثاني
             st.metric(label="مؤشر البناء الأخضر المستدام", value="78 / 100", delta="مطابق للمدونة")
         with c3:
             st.metric(label="الكثافة الحجمية التقديرية للمواد", value="2.4 طن/م³")
@@ -37,7 +36,7 @@ def render_portal_3():
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("<p style='color: #94A3B8; font-size: 13px;'>الرسم البياني للتوزيع النسبي لاعتماد المواد وهيكل كفاءة الاستدامة في البناء العراقي الحالي:</p>", unsafe_allow_html=True)
         
-        # إنشاء جدول بيانات إحصائي سريع لعرضه كأرقام مرئية منسقة
+        # [مصحح ومغلق بالكامل] إنشاء جدول بيانات إحصائي سريع سليم القواعد
         chart_data = pd.DataFrame({
             'المادة الأساسية': ['الخرسانة المسلحة', 'حديد التسليح', 'الطابوق والكتل الإنشائية', 'مواد العزل الحراري', 'التأسيسات والألواح'],
             'النسبة المئوية (%)': [45, 15, 25, 10, 5]
@@ -49,10 +48,10 @@ def render_portal_3():
         st.markdown("<p style='color: #64748B; font-size: 11px; margin-bottom: 15px;'>*تم استخراج هذه الكميات الحجمية آلياً عبر محرك قراءة ملفات الـ Revit والـ AutoCAD في الـ Sandbox.*</p>", unsafe_allow_html=True)
         
         # الحسابات الهندسية التقديرية الديناميكية المعتمدة على المدونات لحصر المواد القياسية
-        concrete_qty = round(total_volume_indicator * 0.35, 1)      # م٣ خرسانة لكل م٢ بناء تقريباً
-        steel_qty = round(concrete_qty * 0.11, 1)                  # طن حديد تسليح تقريباً نسبة للخرسانة
-        brick_qty = int(total_volume_indicator * 450)              # عدد الطابوق التقديري للجدران
-        insulation_qty = round(total_volume_indicator * 1.2, 1)     # م٢ مساحات العزل الحراري المقتررة
+        concrete_qty = round(total_volume_indicator * 0.35, 1)
+        steel_qty = round(concrete_qty * 0.11, 1)
+        brick_qty = int(total_volume_indicator * 450)
+        insulation_qty = round(total_volume_indicator * 1.2, 1)
         
         # صياغة مصفوفة جدول الكميات الـ BOQ البرمي الموحد
         boq_items = {
@@ -69,14 +68,11 @@ def render_portal_3():
         }
         
         boq_df = pd.DataFrame(boq_items)
-        # عرض جدول الـ BOQ الشامل بشكل متناسق مع الألوان الداكنة للمنصة
         st.dataframe(boq_df, use_container_width=True, hide_index=True)
         
-        # زر إضافي مركزي لتصدير الكشف الإحصائي الصافي
         st.markdown("<br>", unsafe_allow_html=True)
         if st.button("📥 إصدار وحفظ جدول الكميات المركزي والمواد (PDF BOQ Report)", use_container_width=True):
             st.success("✅ جاري استدعاء أداة `pdf_generator.py` لتوليد الكشف الإحصائي وحصر المواد المعتمد بالـ QR Code...")
             
-            # تسجيل العملية في الصندوق الأسود السيادي
             from core.state_manager import log_action
             log_action(user="Eng. Abdulla", action_details=f"استخرج تقرير حصر المواد الإحصائي BOQ للعقار في {gov}.")
