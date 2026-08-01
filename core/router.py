@@ -1,6 +1,6 @@
 import streamlit as st
 
-# استيراد واجهات البوابات الستة من مجلد views بشكل صحيح وبدون أخطاء إملائية
+# استيراد واجهات البوابات الست القياسية بشكل هندسي سليم وبدون امتدادات .py
 from views.portal_1_compliance import render_portal_1
 from views.portal_2_sustainability import render_portal_2
 from views.portal_3_aggregator import render_portal_3
@@ -10,13 +10,13 @@ from views.portal_6_site_safety import render_portal_6
 
 def route_to_view():
     """
-    الموجه المركزي السيادي.
-    يقرأ رقم البوابة النشطة من ذاكرة السحاب ويستدعي ملفها المخصص فوراً.
+    الموجه المركزي والمستمع الذكي لرقم البوابة النشطة في ذاكرة السحاب.
+    يستدعي شاشة البوابة المطلوبة فوراً عند ضغط زرها المخصص.
     """
-    # قراءة رقم البوابة الحالية الفعالة من الذاكرة السحابية للمنصة
+    # قراءة رقم البوابة الحالية الفعالة من الذاكرة السحابية (الافتراضي هو 1)
     current_portal = st.session_state.get("current_portal", 1)
     
-    # تحويل حركة السيرفر ديناميكياً بناءً على الزر الذي ضغط عليه المهندس
+    # توزيع الحركة برمجياً بناءً على اختيار المهندس المسؤول
     if current_portal == 1:
         render_portal_1()
     elif current_portal == 2:
