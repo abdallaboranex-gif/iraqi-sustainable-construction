@@ -77,7 +77,29 @@ AR_DICTIONARY = {
     "p2_max_u": "الحد الأقصى لمدونة البلديات:",
     "p2_u_compliant": "✓ [مطابق للمدونة الوطنية] - غلاف المبنى يحقق الحماية الحرارية المطلوبة.",
     "p2_u_non_compliant": "❌ [مخالف للمدونة] - تسريب حراري عالٍ! يرجى إضافة ألواح عزل XPS أو استخدام الثرمستون.",
-
+# 1. ألحق هذه المفاتيح في نهاية القاموس العربي (AR_DICTIONARY):
+    "p3_tab_summary": "📉 التحليل الإحصائي العام للمشروع",
+    "p3_tab_boq": "📋 جدول تفكيك المواد والكميات (BOQ)",
+    "p3_lbl_total_area": "إجمالي المساحة الطابقية للحصر:",
+    "p3_lbl_green_score": "مؤشر البناء الأخضر المستدام:",
+    "p3_lbl_density": "الكثافة الحجمية التقديرية للمواد:",
+    "p3_boq_title": "📋 تفكيك جزيئات المواد والمكونات المستخرجة هندسياً",
+    "p3_boq_notice": "*تم استخراج هذه الكميات الحجمية آلياً عبر محرك قراءة ملفات الـ Revit والـ AutoCAD في الـ Sandbox.*",
+    "p3_col_code": "رمز العنصر",
+    "p3_col_desc": "تفاصيل مادة البناء (الجزئيات الدقيقة)",
+    "p3_col_qty": "الكمية المحصورة",
+    "p3_col_unit": "الوحدة الهندسيّة",
+    "p3_item_conc": "خرسانة مسلحة جاهزة مقاومة للأملاح والكبريتات (C30/37) للأسس",
+    "p3_item_steel": "قضبان حديد تسليح عالي المقاومة (Grade 60) مشوه إنشائياً",
+    "p3_item_brick": "طابوق طيني عراقي صنف (أ) مطابق للمواصفة القياسية رقم 25",
+    "p3_item_ins": "ألواح عزل حراري من البوليسترين المبثوق (XPS) بسمك 5سم לגدران غلاف المبنى",
+    "p3_item_solar": "منظومة خلايا شمسية كهروضوئية (Tier 1 Mono-PERC) بقدرة حسابية معتمدة",
+    "p3_unit_m3": "متر مكعب",
+    "p3_unit_ton": "طن متري",
+    "p3_unit_count": "عدد (طابوقة)",
+    "p3_unit_m2": "متر مربع",
+    "p3_unit_panel": "لوح شمسّي",
+    "p3_btn_pdf": "📥 إصدار وحفظ جدول الكميات المركزي والمواد (PDF BOQ Report)",
 
 # 2. قاموس المصطلحات والـ 13 حقل باللغة الإنكليزية
 EN_DICTIONARY = {
@@ -150,6 +172,29 @@ EN_DICTIONARY = {
     "p2_max_u": "Maximum Limit for Municipal Code:",
     "p2_u_compliant": "✓ [Compliant with National Code] - The building envelope achieves required thermal protection.",
     "p2_u_non_compliant": "❌ [Non-Compliant] - High thermal leakage! Please add XPS insulation boards or use AAC blocks.",
+# 2. ألحق هذه المفاتيح في نهاية القاموس الإنكليزي (EN_DICTIONARY):
+    "p3_tab_summary": "📉 General Project Statistical Analysis",
+    "p3_tab_boq": "📋 Bill of Quantities & Material Breakdown (BOQ)",
+    "p3_lbl_total_area": "Total Built-up Area for BOQ:",
+    "p3_lbl_green_score": "Sustainable Green Building Index:",
+    "p3_lbl_density": "Estimated Volumetric Material Density:",
+    "p3_boq_title": "📋 Deconstruction of Engineering Extracted Materials",
+    "p3_boq_notice": "*These volumetric quantities were automatically extracted via the CAD/Revit BIM ingestion engine inside the Sandbox.*",
+    "p3_col_code": "Item Code",
+    "p3_col_desc": "Material & Element Specifications (Granular Details)",
+    "p3_col_qty": "Extracted Quantity",
+    "p3_col_unit": "Engineering Unit",
+    "p3_item_conc": "Ready-mix reinforced concrete, sulfate-resistant (C30/37) for foundations",
+    "p3_item_steel": "High-tensile deformed steel reinforcement rebars (Grade 60) structural",
+    "p3_item_brick": "Iraqi clay bricks Class (A) compliant with National Standard No. 25",
+    "p3_item_ins": "Extruded polystyrene (XPS) thermal insulation boards 5cm thick for building envelope",
+    "p3_item_solar": "Photovoltaic solar panel system (Tier 1 Mono-PERC) approved structural capacity",
+    "p3_unit_m3": "Cubic Meter (m³)",
+    "p3_unit_ton": "Metric Ton (Ton)",
+    "p3_unit_count": "Pcs (Bricks)",
+    "p3_unit_m2": "Square Meter (m²)",
+    "p3_unit_panel": "Solar Panel",
+    "p3_btn_pdf": "📥 Export and Save Central Bill of Quantities (PDF BOQ Report)",
 
 # 3. قاموس المصطلحات والـ 13 حقل باللغة الكردية الصافية
 KU_DICTIONARY = {
@@ -222,6 +267,30 @@ KU_DICTIONARY = {
     "p2_max_u": "بەرزترین سنووری ڕێپێدراوی شارەوانی:",
     "p2_u_compliant": "✓ [هاوتایە لەگەڵ کۆدی نیشتمانی] - تێکەڵکردنی بیناکە پارێزگاری گەرمی پێویست بەدەستدەهێنێت.",
     "p2_u_non_compliant": "❌ [هاوتاب نییە] - دزەکردنی گەرمی بەرزە! تکایە تەختەی دابڕانی XPS زیاد بکە یان بلۆکی سووکی AAC بەکاربهێنە."
+# 3. ألحق هذه المفاتيح في نهاية القاموس الكردي (KU_DICTIONARY):
+    "p3_tab_summary": "📉 شیکردنەوەی ئاماری گشتی پڕۆژەکە",
+    "p3_tab_boq": "📋 خشتەی تێکشکاندنی ماددەکان و بڕەکان (BOQ)",
+    "p3_lbl_total_area": "کۆی ڕووبەری نهۆمەکان بۆ حەسار:",
+    "p3_lbl_green_score": "نیشاندەری بیناسازی سەوزی بەردەوام:",
+    "p3_lbl_density": "چڕی قەبارەیی خەمڵێندراوی ماددەکان:",
+    "p3_boq_title": "📋 تێکشکاندنی جزیاتی ماددەکان و پێکهاتە دەرهێنراوەکان",
+    "p3_boq_notice": "*ئەم بڕە قەبارەییانە بە شێوەیەکی ئۆتۆماتیکی لە ڕێگەی بزوێنەری خوێندنەوەی AutoCAD و Revit BIM لە ناو Sandbox دەرهێنراون.*",
+    "p3_col_code": "کۆدی بابەت",
+    "p3_col_desc": "وردەکارییەکانی ماددەی بیناسازی (جزیاتی ورد)",
+    "p3_col_qty": "بڕی دەرهێنراو",
+    "p3_col_unit": "یەکەی ئەندازیاری",
+    "p3_item_conc": "کۆنکرێتی چەکداری ئامادەکراو و دژە خوێ و سوڵفات (C30/37) بۆ بنەمەکان",
+    "p3_item_steel": "شیشی کۆنکرێتی بەرگری بەرز (Grade 60) بۆ پێکهاتە",
+    "p3_item_brick": "خشتی قوڕی عێراقی جۆری (أ) هاوتا لەگەڵ ستانداردی نیشتمانی ژمارە ٢٥",
+    "p3_item_ins": "تەختەی دابڕانی گەرمی جۆری XPS بە ئەستووری ٥سم بۆ دیواری غیلافی بیناکە",
+    "p3_item_solar": "سیستەمی خانەی سۆلار فۆتۆڤۆڵتاییک (Tier 1 Mono-PERC) بە توانای پەسەندکراو",
+    "p3_unit_m3": "مەتر سێجا (م³)",
+    "p3_unit_ton": "تەن (تەن)",
+    "p3_unit_count": "دانە (خشت)",
+    "p3_unit_m2": "مەتر دووجا (م²)",
+    "p3_unit_panel": "تەختەی سۆلار",
+    "p3_btn_pdf": "📥 دەرکردن و پاراستنی خشتەی بڕی ناوەندی و ماددەکان (PDF BOQ Report)"
+
 # دمج القواميس الثلاثة بشكل نهائي ومستقل تماماً داخل السيرفر
 DICTIONARY = {
     "ar": AR_DICTIONARY,
