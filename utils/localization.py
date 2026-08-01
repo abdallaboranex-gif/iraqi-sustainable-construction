@@ -62,6 +62,23 @@ AR_DICTIONARY = {
     "success_msg": "✅ تهانينا! المخطط الأولي مطابق تماماً لكافة قيود البناء والمدونات المعتمدة جغرافياً في بلدية المنطقة.",
     "error_msg": "❌ تم رصد مخالفات صريحة لشروط البناء والمدونات الوطنية! تم تجميد المعاملة وقفل شهادة التوصية بالإجازة إلكترونياً."
 }
+# 1. ألحق هذه المفاتيح في نهاية القاموس العربي (AR_DICTIONARY):
+    "p2_title_insulation": "🧱 1. العزل الحراري وغلاف المبنى",
+    "p2_title_hvac": "❄️ 2. أحمال التكييف والمنظومات",
+    "p2_title_solar": "☀️ 3. تصميم منظومة الألواح الشمسية",
+    "p2_lbl_material": "نوع مادة بناء الجدران الخارجية المعتمدة:",
+    "p2_lbl_thickness": "سمك طبقة العزل الحراري المقترحة (ملم):",
+    "p2_mat_1": "طابوق طيني اعتيادي (بدون عزل)",
+    "p2_mat_2": "بلوك إسمنتي مجوف",
+    "p2_mat_3": "طابوق مع ألواح بوليسترين عازل (XPS)",
+    "p2_mat_4": "ثرمستون (AAC Blocks) عالي الكفاءة",
+    "p2_res_u_value": "📊 نتائج التدقيق البرمجي لمعامل الانتقال الحراري (U-Value):",
+    "p2_calc_u": "المعامل المحسوب للمبنى:",
+    "p2_max_u": "الحد الأقصى لمدونة البلديات:",
+    "p2_u_compliant": "✓ [مطابق للمدونة الوطنية] - غلاف المبنى يحقق الحماية الحرارية المطلوبة.",
+    "p2_u_non_compliant": "❌ [مخالف للمدونة] - تسريب حراري عالٍ! يرجى إضافة ألواح عزل XPS أو استخدام الثرمستون.",
+
+
 # 2. قاموس المصطلحات والـ 13 حقل باللغة الإنكليزية
 EN_DICTIONARY = {
     "platform_title": "Iraqi Green Construction Data Platform",
@@ -118,6 +135,22 @@ EN_DICTIONARY = {
     "success_msg": "✅ Congratulations! The initial blueprint complies with all building restrictions and approved national codes.",
     "error_msg": "❌ Explicit violations detected against municipal zoning and national codes! File frozen and recommendation certificate locked electronically."
 }
+# 2. ألحق هذه المفاتيح في نهاية القاموس الإنكليزي (EN_DICTIONARY):
+    "p2_title_insulation": "🧱 1. Thermal Insulation & Building Envelope",
+    "p2_title_hvac": "❄️ 2. HVAC Cooling Loads & Systems",
+    "p2_title_solar": "☀️ 3. Solar PV System Design",
+    "p2_lbl_material": "Approved External Wall Construction Material:",
+    "p2_lbl_thickness": "Proposed Thermal Insulation Thickness (mm):",
+    "p2_mat_1": "Standard Clay Brick (No Insulation)",
+    "p2_mat_2": "Hollow Concrete Block",
+    "p2_mat_3": "Clay Brick with XPS Insulation Boards",
+    "p2_mat_4": "High-Efficiency Aerated Autoclaved Concrete (AAC)",
+    "p2_res_u_value": "📊 Thermal Transmittance (U-Value) Audit Results:",
+    "p2_calc_u": "Calculated U-Value for the Building:",
+    "p2_max_u": "Maximum Limit for Municipal Code:",
+    "p2_u_compliant": "✓ [Compliant with National Code] - The building envelope achieves required thermal protection.",
+    "p2_u_non_compliant": "❌ [Non-Compliant] - High thermal leakage! Please add XPS insulation boards or use AAC blocks.",
+
 # 3. قاموس المصطلحات والـ 13 حقل باللغة الكردية الصافية
 KU_DICTIONARY = {
     "platform_title": "سەکۆی بیناسازی بەردەوام",
@@ -174,7 +207,21 @@ KU_DICTIONARY = {
     "success_msg": "✅ پیرۆزە! نەخشەی سەرەتایی بە تەواوی هاوتایە لەگەڵ سەرجەم بەربەستەکانی بیناسازی و کۆدە پەسەندکراوەکان.",
     "error_msg": "❌ سەرپێچی ئاشکرا لە مەرجەکانی بیناسازی و کۆدە نیشتمانییەکان دۆزرایەوە! مامەڵەکە بەسترا و بڕوانامەی ڕاسپاردە بە شێوەی ئەلیکترۆنی قفڵکرا."
 }
-
+# 3. ألحق هذه المفاتيح في نهاية القاموس الكردي (KU_DICTIONARY):
+    "p2_title_insulation": "🧱 ١. دابڕانی گەرمی و تێکەڵکردنی بیناکە",
+    "p2_title_hvac": "❄️ ٢. بارەکانی ساردکردنەوەی HVAC و سیستەمەکان",
+    "p2_title_solar": "☀️ ٣. دیزاینی سیستەمی سۆلار PV",
+    "p2_lbl_material": "ماددەی پەسەندکراو بۆ دروستکردنی دیواری دەرەکی:",
+    "p2_lbl_thickness": "ئەستووری پێشنیارکراوی دابڕانی گەرمی (ملم):",
+    "p2_mat_1": "خشتی قوڕی ستاندارد (بێ دابڕان)",
+    "p2_mat_2": "بلۆکی کۆنکرێتی ناواڵا",
+    "p2_mat_3": "خشت لەگەڵ تەختەی دابڕانی XPS",
+    "p2_mat_4": "کۆنکرێتی هەوایی جۆری AAC (کۆنکرێتی سووک)",
+    "p2_res_u_value": "📊 ئەنجامەکانی پشکنینی هاوکۆلکەی گواستنەوەی گەرمی (U-Value):",
+    "p2_calc_u": "هاوکۆلکەی ئەژمارکراو بۆ بیناکە:",
+    "p2_max_u": "بەرزترین سنووری ڕێپێدراوی شارەوانی:",
+    "p2_u_compliant": "✓ [هاوتایە لەگەڵ کۆدی نیشتمانی] - تێکەڵکردنی بیناکە پارێزگاری گەرمی پێویست بەدەستدەهێنێت.",
+    "p2_u_non_compliant": "❌ [هاوتاب نییە] - دزەکردنی گەرمی بەرزە! تکایە تەختەی دابڕانی XPS زیاد بکە یان بلۆکی سووکی AAC بەکاربهێنە."
 # دمج القواميس الثلاثة بشكل نهائي ومستقل تماماً داخل السيرفر
 DICTIONARY = {
     "ar": AR_DICTIONARY,
