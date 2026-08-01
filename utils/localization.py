@@ -1,96 +1,128 @@
 import streamlit as st
 
-# [صمام الأمان السيادي] قاموس الاستثناءات الهندسية لضمان رصانة المصطلحات
-TECHNICAL_EXCEPTIONS = {
-    "en": {
-        "النظام الإنشائي المقترح للهيكل": "Proposed Structural System",
-        "جدران حاملة": "Bearing Walls",
-        "تصنيف جنس العقار (البلدية)": "Land Zoning Type (Municipality)",
-        "المطابقة الهندسية": "Engineering Compliance",
-        "السلامة الإنشائية": "Structural Integrity",
-        "استدامة الطاقة": "Energy Score",
-        "لوحة المؤشرات الحية": "Live Indicators Panel"
+# مستودع المصطلحات الموحد والمنظف بالملي ثانية لمطابقة مفاتيح الواجهة الـ 13
+LOCALES_POOL = {
+    "العربية": {
+        "platform_title": "منصة البناء المستدام",
+        "platform_sub": "الحوكمة الرقمية والامتثال البيئي",
+        "nav_title": "🎛️ لوحة التحكم السيادية للمنصة",
+        "current_location": "الموقع الحالي",
+        "lang_label": "اللغة",
+        "side_title": "📊 لوحة المؤشرات الحية",
+        "compliance_score": "المطابقة الهندسية / Compliance",
+        "integrity_score": "السلامة الإنشائية / Integrity",
+        "energy_score": "استدامة الطاقة / Energy Score",
+        "user_unregistered": "حساب غير مسجل",
+        "user_action_verify": "اضغط لتأكيد الهوية",
+        "btn_portal_1": "🚪 الباب 1\nالتدقيق والتربة",
+        "btn_portal_2": "🌱 الباب 2\nالطاقة والاستدامة",
+        "btn_portal_3": "📊 الباب 3\nحصر المواد المركزي",
+        "btn_portal_4": "🗺️ الباب 4\nخارطة GIS العراق",
+        "btn_portal_5": "💳 الباب 5\nالبنية والمالية",
+        "btn_portal_6": "🦺 الباب 6\nالسلامة الموقعية",
+        "title_p1": "📋 الباب الأول: تحليل الموقع ومحددات البلدية",
+        "desc_p1": "يرجى ملء الحقول الـ 13 بدقة لتحديد متطلبات فحص التربة والمدونات الهندسية الإلزامية للمشروع.",
+        "lbl_gov": "1. المحافظة",
+        "lbl_district": "2. القضاء / الناحية",
+        "lbl_zoning": "3. تصنيف جنس العقار (البلدية)",
+        "lbl_plot": "4. رقم القطعة والمقاطعة",
+        "lbl_area": "5. المساحة الكلية للأرض (متر مربع)",
+        "lbl_built_area": "6. مساحة البناء الطابقي (متر مربع)",
+        "lbl_floors": "7. عدد الطوابق الكلي",
+        "lbl_height": "8. الارتفاع الكلي للمبنى (متر)",
+        "lbl_basement": "9. هل يحتوي المبنى على سرداب (قبو)؟",
+        "lbl_offset_f": "10. الارتداد الأمامي القانوني (متر)",
+        "lbl_offset_s": "11. الارتدادات الجانبية والخلفية (متر)",
+        "lbl_adjacent": "12. طبيعة الملاصقة والأبنية المجاورة",
+        "lbl_structure": "13. النظام الإنشائي المقترح للهيكل",
+        "btn_trigger_compliance": "🚀 تشغيل محرك المطابقة الفوري وفحص القيود",
+        "warning_empty_fields": "⚠️ يرجى ملء كافة البيانات الجغرافية والإنشائية الـ 13 أولاً!",
+        "success_msg": "✅ تهانينا! المخطط الأولي مطابق تماماً لكافة قيود البناء والمدونات المعتمدة.",
+        "error_msg": "❌ تم رصد مخالفات صريحة لشروط البناء والمدونات الوطنية! تم تجميد المعاملة."
     },
-    "ku": {
-        "جدران حاملة": "دیوارەکانی هەڵگر (دیواری بارهەڵگر)",
-        "المطابقة الهندسية": "گونجانی ئەندازیاری",
-        "السلامة الإنشائية": "سەلامەتی پێکهاتەیی",
-        "استدامة الطاقة": "بەردەوامی وزە"
+    "EN": {
+        "platform_title": "Iraqi Green Construction Data Platform",
+        "platform_sub": "Digital Governance & Environmental Compliance",
+        "nav_title": "🎛️ Platform Sovereign Control Panel",
+        "current_location": "Current Location",
+        "lang_label": "Language",
+        "side_title": "📊 Live Indicators Panel",
+        "compliance_score": "Engineering Compliance",
+        "integrity_score": "Structural Integrity",
+        "energy_score": "Energy Score",
+        "user_unregistered": "Unregistered Account",
+        "user_action_verify": "Click to Verify Identity",
+        "btn_portal_1": "🚪 Portal 1\nZoning & Soil Test",
+        "btn_portal_2": "🌱 Portal 2\nEnergy & Green Score",
+        "btn_portal_3": "📊 Portal 3\nCentral Materials BOQ",
+        "btn_portal_4": "🗺️ Portal 4\nIraq GIS Map View",
+        "btn_portal_5": "💳 Portal 5\nFinance & Payback",
+        "btn_portal_6": "🦺 Portal 6\nField Site Safety",
+        "title_p1": "📋 Portal 1: Site Analysis & Municipal Constraints",
+        "desc_p1": "Please fill out the 13 fields accurately to determine codes.",
+        "lbl_gov": "1. Governorate",
+        "lbl_district": "2. District / Sub-district",
+        "lbl_zoning": "3. Land Zoning Type (Municipality)",
+        "lbl_plot": "4. Plot & Sector Number",
+        "lbl_area": "5. Total Land Area (sqm)",
+        "lbl_built_area": "6. Built-up Footprint Area (sqm)",
+        "lbl_floors": "7. Total Number of Floors",
+        "lbl_height": "8. Total Building Height (meters)",
+        "lbl_basement": "9. Does the building contain a basement?",
+        "lbl_offset_f": "10. Legal Front Offset (meters)",
+        "lbl_offset_s": "11. Side and Rear Offsets (meters)",
+        "lbl_adjacent": "12. Type of Adjacent Buildings",
+        "lbl_structure": "13. Proposed Structural System",
+        "btn_trigger_compliance": "🚀 Trigger Instant Compliance Engine",
+        "warning_empty_fields": "⚠️ Please fill out all 13 fields first!",
+        "success_msg": "✅ Congratulations! The initial blueprint complies with all restrictions and approved national codes.",
+        "error_msg": "❌ Explicit violations detected against municipal zoning and national codes! File frozen."
+    },
+    "كردي": {
+        "platform_title": "سەکۆی بیناسازی بەردەوام",
+        "platform_sub": "حوکمڕانی دیجیتاڵی و پابەندبوونی ژینگەیی",
+        "nav_title": "🎛️ لۆگۆی کۆنترۆڵی سیادی سەکۆکە",
+        "current_location": "شوێنی ئێستا",
+        "lang_label": "زمان",
+        "side_title": "📊 پانێڵی نیشاندەرە زیندووەکان",
+        "compliance_score": "گونجانی ئەندازیاری",
+        "integrity_score": "سەلامەتی پێکهاتەیی",
+        "energy_score": "بەردەوامی وزە",
+        "user_unregistered": "هەژماری تۆمارنەکراو",
+        "user_action_verify": "کلیک بکە بۆ ناسنامە",
+        "btn_portal_1": "🚪 دەروازەی ١\nپشکنینی خاک",
+        "btn_portal_2": "🌱 دەروازەی ٢\nوزە و بەردەوامی",
+        "btn_portal_3": "📊 دەروازەی ٣\nکۆکردنەوەی ماددەکان",
+        "btn_portal_4": "🗺️ دەروازەی ٤\nنەخشەی جی ئێس",
+        "btn_portal_5": "💳 دەروازەی ٥\nدارایی و قازانج",
+        "btn_portal_6": "🦺 دەروازەی ٦\nسەلامەتی مەیدانی",
+        "title_p1": "📋 دەروازەی یەکەم: شیکردنەوەی شوێن و سنووردارکردنی شارەوانی",
+        "desc_p1": "تکایە ١٣ خانەکە بە دروستی پڕبکەرەوە بۆ دیاریکردنی پێویستییەکانی پشکنینی خاک.",
+        "lbl_gov": "١. پارێزگا",
+        "lbl_district": "٢. قەزا / ناحیە",
+        "lbl_zoning": "٣. پۆلێنکردنی زەوی (شارەوانی)",
+        "lbl_plot": "٤. ژمارەی پارچە زەوی و کەرت",
+        "lbl_area": "٥. ڕووبەری گشتی زەوی (مەتر دووجا)",
+        "lbl_built_area": "٦. ڕووبەری بیناسازی نهۆمی (مەتر دووجا)",
+        "lbl_floors": "٧. ژمارەی گشتی نهۆمەکان",
+        "lbl_height": "٨. بەرزی گشتی بیناکە (مەتر)",
+        "lbl_basement": "٩. ئایا بیناکە ژێرزەمینی تێدایە؟",
+        "lbl_offset_f": "١٠. کشانەوەی پێشەوەی یاسایی (مەتر)",
+        "lbl_offset_s": "١١. کشانەوەی تەنیشت و دواوە (مەتر)",
+        "lbl_adjacent": "١٢. سروشتی تەنیشت و بینا هاوسێیەکان",
+        "lbl_structure": "١٣. سیستەمی پێکهاتەیی پێشنیارکراو بۆ چوارچێوەکە",
+        "btn_trigger_compliance": "🚀 دەستپێکردنی بزوێنەری هاوتاکردنی دەستبەجێ",
+        "warning_empty_fields": "⚠️ تکایە سەرەتا سەرجەم خانەکان پڕبکەرەوە!",
+        "success_msg": "✅ پیرۆزە! نەخشەی سەرەتایی بە تەواوی هاوتایە لەگەڵ سەرجەم بەربەستەکانی بیناسازی.",
+        "error_msg": "❌ سەرپێچی ئاشکرا لە مەرجەکانی بیناسازی دۆزرایەوە! مامەڵەکە بەسترا."
     }
 }
 
-def get_text(text_to_translate):
-    """
-    [نسخة نهائية محكمة] دالة المحرك الذكي التلقائي المكتملة مئة بالمئة.
-    تطابق كلمات الوجت الحية مع الذاكرة السحابية لتفعيل التحول الفوري للغات الثلاث [١.١].
-    """
-    if not text_to_translate:
+def get_text(key_code):
+    """مستقبل ومفسر المفاتيح المركزي الموثق سحابياً وبأعلى تباين بصرى للحروف [١.١]."""
+    if not key_code:
         return ""
-        
-    # قراءة لغة الجلسة الحالية المحدثة مباشرة من أزرار الهيدر
-    current_lang = st.session_state.get("language_selection_trigger", "العربية")
-    
-    # إذا كانت اللغة هي العربية، تبث النص كما هو فوراً للحفاظ على السرعة الخارقة
-    if current_lang == "العربية":
-        return text_to_translate
-        
-    # تحويل حالة الرمز برمجياً ليتطابق مع مصفوفات التراجم والاصطلاحات الهندسية
-    lang_code = "en" if current_lang == "EN" else "ku"
-    
-    # التحقق من صمام الأمان (قاموس الاستثناءات الهندسية الصارم) لبلديات العراق
-    exceptions_dict = TECHNICAL_EXCEPTIONS.get(lang_code, {})
-    if text_to_translate in exceptions_dict:
-        return exceptions_dict[text_to_translate]
-        
-    # مصفوفة المحاكاة اللغوية المحدثة والمحاذاة ديناميكياً مع اللغتين الإنكليزية والكردية
-    simulated_translations = {
-        "en": {
-            "منصة البناء المستدام": "Sustainable Construction Platform",
-            "الحوكمة الرقمية والامتثال البيئي": "Digital Governance & Environmental Compliance",
-            "🎛️ لوحة التحكم السيادية للمنصة": "🎛️ Platform Sovereign Control Panel",
-            "الموقع الحالي": "Current Location",
-            "اللغة": "Language",
-            "حساب غير مسجل": "Unregistered Account",
-            "اضغط لتأكيد الهوية": "Click to Verify Identity",
-            "📋 الباب الأول: تحليل الموقع ومحددات البلدية": "📋 Portal 1: Site Analysis & Municipal Constraints",
-            "يرجى ملء الحقول الـ 13 بدقة لتحديد متطلبات فحص التربة والمدونات الهندسية الإلزامية للمشروع.": "Please fill out the 13 fields accurately to determine soil test and mandatory codes.",
-            "1. المحافظة": "1. Governorate",
-            "2. القضاء / الناحية": "2. District / Sub-district",
-            "4. رقم القطعة والمقاطعة": "4. Plot & Sector Number",
-            "5. المساحة الكلية للأرض (متر مربع)": "5. Total Land Area (sqm)",
-            "6. مساحة البناء الطابقي (متر مربع)": "6. Built-up Footprint Area (sqm)",
-            "7. عدد الطوابق الكلي": "7. Total Number of Floors",
-            "8. الارتفاع الكلي للمبنى (متر)": "8. Total Building Height (meters)",
-            "9. هل يحتوي المبنى على سرداب (قبو)؟": "9. Does the building contain a basement?",
-            "10. الارتداد الأمامي القانوني (متر)": "10. Legal Front Offset (meters)",
-            "11. الارتدادات الجانبية والخلفية (متر)": "11. Side and Rear Offsets (meters)",
-            "12. طبيعة الملاصقة والأبنية المجاورة": "12. Type of Adjacent Buildings",
-            "🚀 تشغيل محرك المطابقة الفوري وفحص القيود": "🚀 Trigger Instant Compliance Engine",
-            "⚠️ يرجى ملء كافة البيانات الجغرافية والإنشائية الـ 13 أولاً؛ لا يمكن تشغيل محرك المطابقة على حقول فارغة!": "⚠️ Please fill out all 13 fields first!",
-            "🧱 1. العزل الحراري وغلاف المبنى": "🧱 1. Thermal Insulation & Building Envelope",
-            "❄️ 2. أحمال التكييف والمنظومات": "❄️ 2. HVAC Cooling Loads & Systems",
-            "☀️ 3. تصميم منظومة الألواح الشمسية": "☀️ 3. Solar PV System Design"
-        },
-        "ku": {
-            "منصة البناء المستدام": "سەکۆی بیناسازی بەردەوام",
-            "الحوكمة الرقمية والامتثال البيئي": "حوکمڕانی دیجیتاڵی و پابەندبوونی ژینگەیی",
-            "🎛️ لوحة التحكم السيادية للمنصة": "🎛️ لۆگۆی کۆنترۆڵی سیادی سەکۆکە",
-            "الموقع الحالي": "شوێنی ئێستا",
-            "اللغة": "زمان",
-            "حساب غير مسجل": "هەژماری تۆمارنەکراو",
-            "اضغط لتأكيد الهوية": "کلیک بکە بۆ ناسنامە",
-            "📋 الباب الأول: تحليل الموقع ومحددات البلدية": "📋 دەروازەی یەکەم: شیکردنەوەی شوێن",
-            "1. المحافظة": "١. پارێزگا",
-            "2. القضاء / الناحية": "٢. قەزا / ناحیە",
-            "7. عدد الطوابق الكلي": "٧. ژمارەی گشتی نهۆمەکان",
-            "8. الارتفاع الكلي للمبنى (متر)": "٨. بەرزی گشتی بیناکە (مەتر)",
-            "🚀 تشغيل محرك المطابقة الفوري وفحص القيود": "🚀 دەستپێکردنی بزوێنەری هاوتاکردن",
-            "🧱 1. العزل الحراري وغلاف المبنى": "🧱 ١. دابڕانی گەرمی بیناکە",
-            "❄️ 2. أحمال التكييف والمنظومات": "❄️ ٢. بارەکانی ساردکردنەوەی HVAC",
-            "☀️ 3. تصميم منظومة الألواح الشمسية": "☀️ ٣. دیزاینی سیستەمی سۆلار PV"
-        }
-    }
-    
-    # سحب النص المترجم وبثه تلقائياً وبمرونة تامة
-    lang_pool = simulated_translations.get(lang_code, {})
-    return lang_pool.get(text_to_translate, text_to_translate)
+    # جلب الخيار الفعال الحركي مباشرة من متغير النواة العام لمنع تشتت الكاش
+    current_lang = st.session_state.get("language", "العربية")
+    active_dict = LOCALES_POOL.get(current_lang, LOCALES_POOL["العربية"])
+    return active_dict.get(key_code, key_code)
