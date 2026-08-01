@@ -8,7 +8,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. حقن تصميم CSS لتطابق بصري كامل بالثيم المشرق والحروف الكحلية الغامقة الحادة
+# 2. حقن تصميم CSS لتطابق بصري كامل بالثيم المشرق الناصع والحروف الكحلية الغامقة الحادة
 st.markdown(
     """
     <link rel="preconnect" href="https://googleapis.com">
@@ -16,21 +16,28 @@ st.markdown(
     <link href="https://googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <style>
+        /* إعداد الخلفية العامة للمتصفح باللون الثلجي الناعم وتثبيت الخط */
         html, body, [data-testid="stAppViewContainer"] {
             background-color: #F1F5F9 !important;
             font-family: 'Tajawal', sans-serif !important;
         }
+        
+        /* تغميق الحروف والنصوص بالكامل للون الكحلي الداكن الحاد ورفع الوزن للوضوح */
         p, span, label, .stMarkdown, [data-testid="stWidgetLabel"] p {
             font-family: 'Tajawal', sans-serif !important;
             font-size: 16px !important;
             font-weight: 700 !important;
             color: #0F172A !important;
         }
+        
+        /* تفخيم وتشديد العناوين الكبرى باللون الأسود الملكي الحاد */
         h1, h2, h3, h4, strong {
             font-family: 'Tajawal', sans-serif !important;
             color: #020617 !important;
             font-weight: 800 !important;
         }
+        
+        /* صياغة الكروت والحاويات بخلفية بيضاء وحواف دائرية ناعمة جداً وظلال عائمة عريضة */
         [data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderContainer"] {
             border: 1px solid #CBD5E1 !important;
             border-radius: 16px !important;
@@ -39,6 +46,8 @@ st.markdown(
             padding: 22px !important;
             margin-bottom: 15px !important;
         }
+        
+        /* تحسين مظهر أزرار الأبواب الستة لتكون مصفوفة فخمة وسلسة التصفح بوزن غامق */
         .stButton > button {
             border-radius: 10px !important;
             border: 1px solid #94A3B8 !important;
@@ -49,6 +58,8 @@ st.markdown(
             color: #0F172A !important;
             transition: all 0.25s ease !important;
         }
+        
+        /* تأثير الزر النشط حالياً ليميل للأزرق الملكي المشرق العالي التباين */
         .stButton > button[data-testid="baseButton-primary"] {
             background-color: #1D4ED8 !important;
             color: #FFFFFF !important;
@@ -58,24 +69,23 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-# 3. استيراد المكونات المستقلة والنواة المركزية وأداة الترجمة الفورية
+# 3. استيراد المكونات المستقلة والنواة المركزية وأداة الترجمة الفورية الشاملة
 from core.state_manager import init_session_state
 from core.router import route_to_view
 from components.header import render_header
 from components.footer import render_footer
 from components.analytics_cards import render_side_analytics
-from utils.localization import get_text # [تحديث] استيراد دالة الترجمة
+from utils.localization import get_text # استيراد دالة الترجمة
 
 # 4. تهيئة ذاكرة الجلسة
 init_session_state()
 
-# 5. بناء وتشغيل الشريحة العليا الفخمة والمشرقة
+# 5. بناء وتشغيل الشريحة العليا الفخمة والمشرقة (تضم الصورة وصندوق الموقع الأبيض)
 render_header()
 
 st.markdown("<hr style='border-color: #CBD5E1; margin: 15px 0;'>", unsafe_allow_html=True)
 
-# 6. [تحديث حركي للغات] ربط عنوان لوحة التحكم بالقاموس المترجم
+# 6. [تحديث حركي] ربط عنوان لوحة التحكم بالقاموس المترجم لحظياً باللغات الثلاث
 st.markdown(f"<h4 style='color: #0F172A; font-size: 17px !important; margin-bottom: 12px; font-weight:800;'>{get_text('nav_title')}</h4>", unsafe_allow_html=True)
 
 nav_cols = st.columns(6)
@@ -105,7 +115,7 @@ for idx, col in enumerate(nav_cols):
 
 st.markdown("<hr style='border-color: #CBD5E1; margin: 15px 0;'>", unsafe_allow_html=True)
 
-# 7. تقسيم القسم الوسطي للشاشة بالطول إلى عمودين متوازيين
+# 7. تقسيم القسم الوسطي للشاشة بالطول إلى عمودين متوازيين ومطابقين للصورة الهيكلية مئة بالمئة
 col_main, col_side = st.columns([2.8, 1.2], gap="large")
 
 with col_main:
