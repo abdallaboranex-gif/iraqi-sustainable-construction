@@ -1,12 +1,13 @@
 import streamlit as st
 from engines.code_compliance import verify_site_compliance
-from utils.localization import get_text
+from utils.localization import get_text # استيراد دالة الترجمة الفورية الشاملة
 
 def render_portal_1():
     """
-    واجهة الباب الأول المترجمة بالكامل للغات الثلاث.
+    واجهة الباب الأول المترجمة بالكامل للغات الثلاث (العربية، الكردية، الإنكليزية).
     تم تصفير كافة المدخلات والـ 13 حقل لتفتح بيضاء وفارغة تماماً أمام المستخدم [١.١].
     """
+    # ربط عنوان وشرح البوابة بالقاموس ليتغير لحظياً عند تحويل زر اللغات
     st.markdown(f"<h2 style='color: #1D4ED8; font-size: 22px; margin-bottom: 5px; font-weight:800;'>{get_text('title_p1')}</h2>", unsafe_allow_html=True)
     st.markdown(f"<p style='color: #0F172A; font-size: 13px;'>{get_text('desc_p1')}</p>", unsafe_allow_html=True)
     
@@ -15,20 +16,19 @@ def render_portal_1():
         
         c1, c2, c3 = st.columns(3)
         with c1:
-            # القائمة المنسدلة تفتح بدون خيار محدد مسبقاً (تنتظر الاختيار)
+            # القائمة المنسدلة تفتح بدون خيار محدد مسبقاً (تنتظر اختيار المستخدم)
             gov = st.selectbox(get_text("lbl_gov"), ["", "بغداد", "نينوى", "البصرة", "أربيل", "صلاح الدين", "الأنبار", "بابل", "النجف"], index=0)
         with c2:
-            # [تم التصفير] حقل القضاء فارغ تماماً ويمسح أي نصوص افتراضية
+            # حقل القضاء فارغ تماماً ويمسح أي نصوص افتراضية مسبقة
             district = st.text_input(get_text("lbl_district"), placeholder="مثال: الكرخ / المنصور", value="")
         with c3:
             zoning = st.selectbox(get_text("lbl_zoning"), ["", "سكني صرف", "تجاري", "صناعي", "زراعي مشمول", "حكومي / خدمي"], index=0)
             
         c4, c5, c6 = st.columns(3)
         with c4:
-            # [تم التصفير] حقل رقم القطعة فارغ تماماً
             plot_num = st.text_input(get_text("lbl_plot"), placeholder="مثال: 4/12 م10 داوودي", value="")
         with c5:
-            # تحديد القيمة الابتدائية بـ 0.0 لتجبر المستخدم على كتابة المساحة بيده
+            # القيمة الابتدائية 0.0 لتجبر المستخدم على كتابة المساحة الحقيقية بيده
             total_area = st.number_input(get_text("lbl_area"), min_value=0.0, value=0.0, step=10.0)
         with c6:
             built_area = st.number_input(get_text("lbl_built_area"), min_value=0.0, value=0.0, step=10.0)
@@ -55,12 +55,13 @@ def render_portal_1():
         st.markdown("<br>", unsafe_allow_html=True)
         structural_system = st.selectbox(get_text("lbl_structure"), ["", "هيكل خرساني مسلّح", "جدران حاملة", "هيكل حديدي", "مختلط / خاص"], index=0)
         st.markdown("<br>", unsafe_allow_html=True)
-        submit_filter = st.button(get_text("btn_trigger"), use_container_width=True)
+        # ربط اسم زر التشغيل بالقاموس ليتغير حسب اللغة المختارة
+        submit_filter = st.button(get_text("btn_trigger_compliance"), use_container_width=True)
         
         if submit_filter:
-            # صمام أمان حازم: التحقق من أن المستخدم لم يترك الحقول الرئيسية فارغة أو بقيمة صفر
+            # صمام أمان حازم لمنع الضغط والتشغيل على حقول فارغة أو بقيمة صفر
             if not gov or not district or not zoning or total_area == 0.0 or floors == 0:
-                st.warning("⚠️ يرجى ملء كافة البيانات الجغرافية والإنشائية الـ 13 أولاً؛ لا يمكن تشغيل محرك المطابقة على حقول فارغة!")
+                st.warning(get_text("warning_empty_fields"))
             else:
                 st.session_state.property_data["governorate"] = gov
                 st.session_state.property_data["district"] = district
@@ -74,11 +75,13 @@ def render_portal_1():
                 st.markdown("<br><hr style='border-color: #CBD5E1;'>", unsafe_allow_html=True)
                 
                 if result["status"]:
+                    # عرض رسالة النجاح الخضراء المترجمة من القاموس الموحد
                     st.success(get_text("success_msg"))
                     with st.expander("🔍 بنود الفحص / Check Details"):
                         for log in result["logs"]:
                             st.markdown(f"<span style='color: #10B981; font-weight:700;'>{log}</span>", unsafe_allow_html=True)
                 else:
+                    # عرض رسالة المخالفة الحمراء الصارمة المترجمة من القاموس
                     st.error(get_text("error_msg"))
                     with st.expander("🚨 سجل الخرق القانوني / Violations Log", expanded=True):
                         for error in result["errors"]:
