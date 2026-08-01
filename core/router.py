@@ -1,7 +1,8 @@
 import streamlit as st
 from views.portal_1_compliance import render_portal_1
-from views.portal_2_sustainability import render_portal_2 # استيراد البوابة الثانية
+from views.portal_2_sustainability import render_portal_2
 from views.portal_3_aggregator import render_portal_3
+from views.portal_4_gis_map import render_portal_4 # استيراد البوابة الرابعة الجغرافية
 
 def route_to_view():
     """الموجه المركزي لقراءة البوابة النشطة وعرض واجهتها المخصصة في السحاب"""
@@ -13,6 +14,8 @@ def route_to_view():
         render_portal_2()
     elif current_portal == 3:
         render_portal_3()
+    elif current_portal == 4:
+        render_portal_4()
     else:
         st.markdown(
             f"""
