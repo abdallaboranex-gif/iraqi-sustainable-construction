@@ -1,6 +1,12 @@
 import streamlit as st
-from components.workflow_steps import render_workflow_steps
+from views.portal_1_compliance import render_portal_1
 
 def route_to_view():
-    """توجيه حركة السيرفر لعرض مسار العمل والخطوات الزمنية للـ 6 بوابات"""
-    render_workflow_steps()
+    """الموجه المركزي لقراءة البوابة النشطة وعرض ملفها المخصص"""
+    # قراءة رقم البوابة الحالية الفعالة من الذاكرة السحابية (الافتراضي هو 1)
+    current_portal = st.session_state.get("current_portal", 1)
+    
+    if current_portal == 1:
+        render_portal_1()
+    else:
+        st.write("البوابات الأخرى سيتم حقن أكوادها بالتسلسل")
