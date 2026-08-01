@@ -100,6 +100,15 @@ AR_DICTIONARY = {
     "p3_unit_m2": "متر مربع",
     "p3_unit_panel": "لوح شمسّي",
     "p3_btn_pdf": "📥 إصدار وحفظ جدول الكميات المركزي والمواد (PDF BOQ Report)",
+# 1. ألحق هذه المفاتيح في نهاية القاموس العربي (AR_DICTIONARY):
+    "p5_tab_billing": "🔐 البنية التحتية وباقات الاشتراك والدفع",
+    "p5_tab_finance": "💰 محرك الجدوى المالية وفترة استرداد رأس المال",
+    "p5_lbl_cost": "متوسط كلفة بناء المتر المربع الهيكلي والمشطب في السوق (ر.س):",
+    "p5_btn_pdf": "📥 إصدار وثيقة الجدوى الاقتصادية وعائد الاستثمار (PDF Financial Report)",
+    "p6_title": "🦺 الباب السادس: إدارة السلامة الموقعية والامتثال البيئي الميداني",
+    "p6_desc": "الواجهة التنفيذية للمفتشين واللجان الرقابية لتوثيق واقع الحال ومطابقة التنفيذ الفعلي مع المخططات والمدونات الرسمية.",
+    "p6_btn_freeze": "🔴 إرسال التقرير الميداني وتجميد المعاملة فوراً",
+    "p6_btn_resume": "🟢 إعتماد تقرير التصحيح وفك قفل المعاملة لاستئناف العمل",
 
 # 2. قاموس المصطلحات والـ 13 حقل باللغة الإنكليزية
 EN_DICTIONARY = {
@@ -195,6 +204,15 @@ EN_DICTIONARY = {
     "p3_unit_m2": "Square Meter (m²)",
     "p3_unit_panel": "Solar Panel",
     "p3_btn_pdf": "📥 Export and Save Central Bill of Quantities (PDF BOQ Report)",
+# 2. ألحق هذه المفاتيح في نهاية القاموس الإنكليزي (EN_DICTIONARY):
+    "p5_tab_billing": "🔐 Digital Infrastructure & Subscriptions",
+    "p5_tab_finance": "💰 Financial Engineering & Capital Payback Period",
+    "p5_lbl_cost": "Average Market Construction Cost per Square Meter (IQD):",
+    "p5_btn_pdf": "📥 Export Feasibility & Return on Investment Document (PDF Financial Report)",
+    "p6_title": "🦺 Portal 6: Site Safety Management & Field Environmental Compliance",
+    "p6_desc": "The enforcement interface for inspectors to audit reality, document compliance, and match field execution with approved codes.",
+    "p6_btn_freeze": "🔴 Submit Field Audit Report & Freeze File Immediately",
+    "p6_btn_resume": "🟢 Approve Rectification Report & Release File Lockdown for Resuming Work",
 
 # 3. قاموس المصطلحات والـ 13 حقل باللغة الكردية الصافية
 KU_DICTIONARY = {
@@ -290,6 +308,15 @@ KU_DICTIONARY = {
     "p3_unit_m2": "مەتر دووجا (م²)",
     "p3_unit_panel": "تەختەی سۆلار",
     "p3_btn_pdf": "📥 دەرکردن و پاراستنی خشتەی بڕی ناوەندی و ماددەکان (PDF BOQ Report)"
+# 3. ألحق هذه المفاتيح في نهاية القاموس الكردي (KU_DICTIONARY):
+    "p5_tab_billing": "🔐 ژێرخانی دیجیتاڵی و بەشداریکردنەکان",
+    "p5_tab_finance": "💰 ئەندازیاری دارایی و ماوەی گەڕانەوەی سەرمایە",
+    "p5_lbl_cost": "تێکڕای تێچووی دروستکردنی مەتر دووجا لە بازاڕدا (IQD):",
+    "p5_btn_pdf": "📥 دەرکردنی بەڵگەنامەی توانای دارایی و گەڕانەوەی وەبەرهێنان (PDF Financial Report)",
+    "p6_title": "🦺 دەروازەی شەشەم: بەڕێوەبردنی سەلامەتی مەیدانی و پابەندبوونی ژینگەیی",
+    "p6_desc": "واجهەی جێبەجێکردن بۆ پشکێنەران و لیژنە چاودێرییەکان بۆ دۆکیۆمێنتکردنی دۆخی مەیدانی و گونجانی جێبەجێکردنی ڕاستەقینە لەگەڵ کۆدە فەرمییەکان.",
+    "p6_btn_freeze": "🔴 ناردنی ڕاپۆرتی مەیدانی و بەستنی دەستبەجێی مامەڵەکە",
+    "p6_btn_resume": "🟢 پەسەندکردنی ڕاپۆرتی ڕاستکردنەوە و لادانی قفڵی مامەڵەکە بۆ دەستپێکردنەوەی کارەکان"
 
 # دمج القواميس الثلاثة بشكل نهائي ومستقل تماماً داخل السيرفر
 DICTIONARY = {
