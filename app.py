@@ -8,7 +8,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. حقن تصميم CSS لتطابق بvisual كامل مع الصورة (خلفية فاتحة، ظلال، حواف دائرية، خط فخم)
+# 2. [تحديث صارم] حقن تصميم CSS لتغميق النصوص والحروف مئة بالمئة وزيادة وضوح المقروئية
 st.markdown(
     """
     <link rel="preconnect" href="https://googleapis.com">
@@ -22,27 +22,27 @@ st.markdown(
             font-family: 'Tajawal', sans-serif !important;
         }
         
-        /* ضبط حجم النصوص والكلمات لتكون ضخمة ومقروءة بوضوح */
-        p, span, label, .stMarkdown {
+        /* [تحديث] إلغاء الألوان الباهتة وتغميق الحروف والنصوص بالكامل للون الكحلي الداكن الحاد ورفع الوزن */
+        p, span, label, .stMarkdown, [data-testid="stWidgetLabel"] p {
             font-family: 'Tajawal', sans-serif !important;
-            font-size: 15.5px !important;
-            font-weight: 500;
-            color: #334155 !important;
+            font-size: 16px !important;
+            font-weight: 700 !important; /* جعل الحروف غامقة وممتلئة */
+            color: #0F172A !important;   /* لون كحلي داكن شديد التباين والوضوح */
         }
         
-        /* تفخيم العناوين الكبرى باللون الكحلي الداكن الملوكي */
+        /* تفخيم وتشديد العناوين الكبرى باللون الأسود الملكي الحاد */
         h1, h2, h3, h4, strong {
             font-family: 'Tajawal', sans-serif !important;
-            color: #0F172A !important;
+            color: #020617 !important;   /* سواد حاد وواضح للمصطلحات */
             font-weight: 800 !important;
         }
         
-        /* [مطابق للصورة] صياغة الكروت والحاويات بخلفية بيضاء تماماً مع حواف ناعمة جداً وظلال عائمة */
+        /* صياغة الكروت والحاويات بخلفية بيضاء تماماً مع حواف ناعمة جداً وظلال عائمة */
         [data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderContainer"] {
-            border: 1px solid #E2E8F0 !important;
+            border: 1px solid #CBD5E1 !important; /* تغميق حدود الكروت لتصبح بارزة مسمومة */
             border-radius: 16px !important;
             background-color: #FFFFFF !important;
-            box-shadow: 0 10px 15px -3px rgba(148, 163, 184, 0.08), 0 4px 6px -4px rgba(148, 163, 184, 0.08) !important;
+            box-shadow: 0 10px 15px -3px rgba(148, 163, 184, 0.12), 0 4px 6px -4px rgba(148, 163, 184, 0.12) !important;
             padding: 22px !important;
             margin-bottom: 15px !important;
         }
@@ -50,17 +50,17 @@ st.markdown(
         /* تحسين مظهر أزرار الأبواب الستة لتكون مصفوفة فخمة وسلسة التصفح */
         .stButton > button {
             border-radius: 10px !important;
-            border: 1px solid #E2E8F0 !important;
+            border: 1px solid #94A3B8 !important; /* تغميق حدود الزر غير النشط */
             padding: 12px 18px !important;
-            font-size: 14.5px !important;
-            font-weight: 700 !important;
+            font-size: 15px !important;
+            font-weight: 800 !important; /* تغميق نصوص الأزرار */
             background-color: #FFFFFF !important;
             color: #0F172A !important;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
             transition: all 0.25s ease !important;
         }
         
-        /* تأثير الزر النشط حالياً ليميل للأزرق الملكي والمشرق */
+        /* تأثير الزر النشط حالياً ليميل للأزرق الملكي والمشرق العالي التباين */
         .stButton > button[data-testid="baseButton-primary"] {
             background-color: #1D4ED8 !important;
             color: #FFFFFF !important;
@@ -84,10 +84,10 @@ init_session_state()
 # 5. بناء وتشغيل الشريحة العليا الفخمة والمشرقة
 render_header()
 
-st.markdown("<hr style='border-color: #E2E8F0; margin: 15px 0;'>", unsafe_allow_html=True)
+st.markdown("<hr style='border-color: #CBD5E1; margin: 15px 0;'>", unsafe_allow_html=True)
 
 # 6. بناء شريط أزرار التنقل للأبواب الستة الرئيسية
-st.markdown("<h4 style='color: #475569; font-size: 16px !important; margin-bottom: 12px; font-weight:700;'>🎛️ لوحة التحكم السيادية للمنصة</h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='color: #0F172A; font-size: 17px !important; margin-bottom: 12px; font-weight:800;'>🎛️ لوحة التحكم السيادية للمنصة</h4>", unsafe_allow_html=True)
 
 nav_cols = st.columns(6)
 portals_titles = [
@@ -113,7 +113,7 @@ for idx, col in enumerate(nav_cols):
             st.session_state.current_portal = portal_num
             st.rerun()
 
-st.markdown("<hr style='border-color: #E2E8F0; margin: 15px 0;'>", unsafe_allow_html=True)
+st.markdown("<hr style='border-color: #CBD5E1; margin: 15px 0;'>", unsafe_allow_html=True)
 
 # 7. تقسيم القسم الوسطي للشاشة بالطول إلى عمودين متوازيين (تطابق الهيكل البصري)
 col_main, col_side = st.columns([2.8, 1.2], gap="large")
@@ -125,7 +125,7 @@ with col_side:
     render_side_analytics()
 
 st.markdown("<br><br>", unsafe_allow_html=True)
-st.markdown("<hr style='border-color: #E2E8F0; margin: 15px 0;'>", unsafe_allow_html=True)
+st.markdown("<hr style='border-color: #CBD5E1; margin: 15px 0;'>", unsafe_allow_html=True)
 
 # 8. تشغيل تذييل الصفحة الموحد في القاع
 render_footer()
