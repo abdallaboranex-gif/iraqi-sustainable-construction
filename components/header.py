@@ -3,10 +3,9 @@ from core.security_crypto import mask_sensitive_data
 
 def render_header():
     """
-    مكون الشريحة العليا السيادي الفخم (The Sovereign Header Component).
-    مبني بالثيم المشرق، الحروف الكحلية الغامقة، وبوابة الهوية المنبثقة التفاعلية المحمية.
+    مكون الشريحة العليا المطور والمنظف تماماً من أي أخطاء قواعد برمجية.
+    يعمل بالثيم المشرق والحروف الكحلية الغامقة والنافذة المنبثقة التفاعلية.
     """
-    # تهيئة بيانات أولية مشفرة في ذاكرة الجلسة للمحاكاة الآمنة والتوثيق السيادي
     if "user_identity" not in st.session_state:
         st.session_state.user_identity = {
             "full_name": "المهندس عبد الله عمر الجبوري",
@@ -20,10 +19,8 @@ def render_header():
             ]
         }
 
-    # تقسيم الهيدر بمسافات بصرية عريضة ومطابقة تماماً للصورة المرجعية
     col_brand, col_context, col_user = st.columns([2.6, 1.8, 1.6], gap="small")
     
-    # الشق الأول: أقصى اليسار - الهوية والشعار اللفظي العريض للمنصة
     with col_brand:
         st.markdown(
             """
@@ -42,7 +39,6 @@ def render_header():
             unsafe_allow_html=True
         )
         
-    # الشق الثاني: الوسط - صندوق الموقع المشرق الفاخر ومبدل اللغات الثلاثي
     with col_context:
         sub_col1, sub_col2 = st.columns(2)
         
@@ -83,7 +79,6 @@ def render_header():
                 st.session_state.language = "en"
                 st.rerun()
 
-    # الشق الثالث: أقصى اليمين - نافذة ملف المستخدم الشخصي المنبثقة التفاعلية الموثقة (Popover فخم)
     with col_user:
         st.markdown("<div style='padding-top: 6px;'></div>", unsafe_allow_html=True)
         
@@ -98,7 +93,7 @@ def render_header():
                         🛡️ حساب موثق سيادياً ونقابياً | Professional Verified
                     </span>
                     <span style='color: #475569 !important; font-size: 11px !important; font-weight: 700 !important; display: block; margin-top: 2px;'>
-                        المرتبة المعتمدة: {user_data['rank_title']} [١.١]
+                        المرتبة المعتمدة: {user_data['rank_title']}
                     </span>
                 </div>
                 """, 
@@ -143,5 +138,5 @@ def render_header():
             masked_sid = mask_sensitive_data(user_data["syndicate_id"])
             
             st.markdown(f"💳 **الرقم الوطني الموحد:** ` {masked_nid} `")
-            st.markdown(f"📐 **رقم الهوية النقابية العراقية:** ` {masked_sid} `") [١.١]
+            st.markdown(f"📐 **رقم الهوية النقابية العراقية:** ` {masked_sid} `")
             st.markdown("<span style='color: #64748B; font-size: 11px; display: block; margin-top: 4px;'>*الحقول معماة ومحمية بتشفير AES-256 لمنع تسريب البيانات البحتة.*</span>", unsafe_allow_html=True)
