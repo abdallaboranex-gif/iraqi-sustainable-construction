@@ -1,13 +1,16 @@
 import streamlit as st
 from views.portal_1_compliance import render_portal_1
-from views.portal_3_aggregator.py import render_portal_3 # استيراد البوابة الثالثة
+from views.portal_2_sustainability import render_portal_2 # استيراد البوابة الثانية
+from views.portal_3_aggregator import render_portal_3
 
 def route_to_view():
     """الموجه المركزي لقراءة البوابة النشطة وعرض واجهتها المخصصة في السحاب"""
-    current_portal = st.session_state.current_portal
+    current_portal = st.session_state.get("current_portal", 1)
     
     if current_portal == 1:
         render_portal_1()
+    elif current_portal == 2:
+        render_portal_2()
     elif current_portal == 3:
         render_portal_3()
     else:
