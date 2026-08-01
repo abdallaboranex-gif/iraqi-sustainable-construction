@@ -54,3 +54,36 @@ def render_portal_1():
 
         st.markdown("<br>", unsafe_allow_html=True)
         structural_system = st.selectbox(get_text("lbl_structure"), ["", "هيكل خرساني مسلّح", "جدران حاملة", "هيكل حديدي", "مختلط / خاص"], index=0)
+        st.markdown("<br>", unsafe_allow_html=True)
+        submit_filter = st.button(get_text("btn_trigger"), use_container_width=True)
+        
+        if submit_filter:
+            # صمام أمان حازم: التحقق من أن المستخدم لم يترك الحقول الرئيسية فارغة أو بقيمة صفر
+            if not gov or not district or not zoning or total_area == 0.0 or floors == 0:
+                st.warning("⚠️ يرجى ملء كافة البيانات الجغرافية والإنشائية الـ 13 أولاً؛ لا يمكن تشغيل محرك المطابقة على حقول فارغة!")
+            else:
+                st.session_state.property_data["governorate"] = gov
+                st.session_state.property_data["district"] = district
+                st.session_state.property_data["zoning_type"] = zoning
+                st.session_state.property_data["built_area"] = built_area
+                st.session_state.property_data["floors"] = floors
+                
+                result = verify_site_compliance(governorate=gov, zoning_type=zoning, building_height=building_height, floors=floors)
+                st.session_state.property_data["is_compliant"] = result["status"]
+                
+                st.markdown("<br><hr style='border-color: #CBD5E1;'>", unsafe_allow_html=True)
+                
+                if result["status"]:
+                    st.success(get_text("success_msg"))
+                    with st.expander("🔍 بنود الفحص / Check Details"):
+                        for log in result["logs"]:
+                            st.markdown(f"<span style='color: #10B981; font-weight:700;'>{log}</span>", unsafe_allow_html=True)
+                else:
+                    st.error(get_text("error_msg"))
+                    with st.expander("🚨 سجل الخرق القانوني / Violations Log", expanded=True):
+                        for error in result["errors"]:
+                            st.markdown(f"<span style='color: #EF4444; font-weight: 700;'>{error}</span>", unsafe_allow_html=True)
+                            
+                from core.state_manager import log_action
+                log_action(user=st.session_state.user_identity.get("full_name", "Anonymous"), action_details=f"شغّل محرك المطابقة لـ {gov}، النتيجة: {result['status']}")
+                st.rerun()
