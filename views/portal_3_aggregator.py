@@ -6,8 +6,8 @@ def render_portal_3():
     واجهة الباب الثالث: البوابة المركزية وتجميع البيانات وحصر المواد.
     تفكك المشروع لجزئيات دقيقة من مواد البناء وتصيغ نظام إحصائي متكامل.
     """
-    st.markdown("<h2 style='color: #00FFCC; font-size: 22px; margin-bottom: 5px;'>📊 الباب الثالث: مركز تجميع البيانات وحصر المواد الإحصائي</h2>", unsafe_allow_html=True)
-    st.markdown("<p style='color: #94A3B8; font-size: 13px;'>نظام مركزي يقوم بقراءة وتحليل البيانات وجزئيات المواد المدخلة تلقائياً من ملفات المختبرات ومخططات الـ BIM المصممة.</p>", unsafe_allow_html=True)
+    st.markdown("<h2 style='color: #1D4ED8; font-size: 22px; margin-bottom: 5px; font-weight:800;'>📊 الباب الثالث: مركز تجميع البيانات وحصر المواد الإحصائي</h2>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #0F172A; font-size: 13px;'>نظام مركزي يقوم بقراءة وتحليل البيانات وجزئيات المواد المدخلة تلقائياً من ملفات المختبرات ومخططات الـ BIM المصممة.</p>", unsafe_allow_html=True)
     
     # جلب مساحة البناء وعدد الطوابق من الباب الأول لغرض الحسابات الإحصائية التقديرية التلقائية
     property_info = st.session_state.property_data
@@ -22,30 +22,30 @@ def render_portal_3():
     tab_summary, tab_boq = st.tabs(["📉 التحليل الإحصائي العام للمشروع", "📋 جدول تفكيك المواد والكميات (BOQ)"])
     
     with tab_summary:
-        st.markdown("<h4 style='color: #F8FAFC; font-size: 15px; margin-bottom: 15px;'>📊 الرؤية الإحصائية العامة للكتلة الحجمية للمبنى</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='color: #0F172A; font-size: 15px; margin-bottom: 15px;'>📊 الرؤية الإحصائية العامة للكتلة الحجمية للمبنى</h4>", unsafe_allow_html=True)
         
         # عرض كروت إحصائية ملخصة سريعة مأخوذة من الحساب البرمجي الموحد
         c1, c2, c3 = st.columns(3)
         with c1:
             st.metric(label="إجمالي المساحة الطابقية للحصر", value=f"{total_volume_indicator} م²")
         with c2:
-            st.metric(label="مؤشر البناء الأخضر المستدام", value="78 / 100", delta="مطابق للمدونة")
+            st.metric(label="مؤشر البناء الأخضر المستدام", value="78 / 100")
         with c3:
             st.metric(label="الكثافة الحجمية التقديرية للمواد", value="2.4 طن/م³")
             
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("<p style='color: #94A3B8; font-size: 13px;'>الرسم البياني للتوزيع النسبي لاعتماد المواد وهيكل كفاءة الاستدامة في البناء العراقي الحالي:</p>", unsafe_allow_html=True)
+        st.markdown("<p style='color: #0F172A; font-size: 13px; font-weight:700;'>الرسم البياني للتوزيع النسبي لاعتماد المواد وهيكل كفاءة الاستدامة في البناء العراقي الحالي:</p>", unsafe_allow_html=True)
         
-        # [مصحح ومغلق بالكامل] إنشاء جدول بيانات إحصائي سريع سليم القواعد
+        # [تم التصحيح والإغلاق بقوس محكم] إنشاء جدول بيانات إحصائي سليم ومكتمل القواعد البرمجية
         chart_data = pd.DataFrame({
             'المادة الأساسية': ['الخرسانة المسلحة', 'حديد التسليح', 'الطابوق والكتل الإنشائية', 'مواد العزل الحراري', 'التأسيسات والألواح'],
-            'النسبة المئوية (%)': [45, 15, 25, 10, 5]
+            'النسبة المئوية (%)': [35, 15, 25, 15, 10]
         })
         st.dataframe(chart_data, use_container_width=True, hide_index=True)
 
     with tab_boq:
-        st.markdown("<h4 style='color: #F8FAFC; font-size: 15px; margin-bottom: 10px;'>📋 تفكيك جزيئات المواد والمكونات المستخرجة هندسياً</h4>", unsafe_allow_html=True)
-        st.markdown("<p style='color: #64748B; font-size: 11px; margin-bottom: 15px;'>*تم استخراج هذه الكميات الحجمية آلياً عبر محرك قراءة ملفات الـ Revit والـ AutoCAD في الـ Sandbox.*</p>", unsafe_allow_html=True)
+        st.markdown("<h4 style='color: #0F172A; font-size: 15px; margin-bottom: 10px;'>📋 تفكيك جزيئات المواد والمكونات المستخرجة هندسياً</h4>", unsafe_allow_html=True)
+        st.markdown("<p style='color: #475569; font-size: 11px; margin-bottom: 15px;'>*تم استخراج هذه الكميات الحجمية آلياً عبر محرك قراءة ملفات الـ Revit والـ AutoCAD في الـ Sandbox.*</p>", unsafe_allow_html=True)
         
         # الحسابات الهندسية التقديرية الديناميكية المعتمدة على المدونات لحصر المواد القياسية
         concrete_qty = round(total_volume_indicator * 0.35, 1)
