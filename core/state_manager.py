@@ -1,46 +1,59 @@
 import streamlit as st
 
-def init_session_state():
+def initialize_session_state():
     """
-    تهيئة وإعداد ذاكرة الجلسة السحابية بحقول بيضاء وفارغة تماماً.
-    منظفة من الحشو ومثبتة لقفل اللغة الصريح 'language' لتصفير انجماد الأزرار [١.١].
+    State Manager: Sovereign Session State Registry.
+    Strictly follows the Iraqi Green Construction Data Platform architecture:
+    - 100% Pure Standard English keys [1.1]
+    - Absolute blank context tracking initialized with 0.0 values or empty vectors [1.1]
+    - Single source of truth for dynamic internationalization logic [1.1]
+    - Correct signature naming to resolve the Streamlit Cloud execution crash [1.1]
     """
-    # [تحديث صارم] توحيد اسم المتغير المركزي ليعتمد الكلمة النصية الصريحة للغات الثلاث
+    
+    # 1. Universal Localization Variable Lock (Defaults to English sovereign key)
     if "language" not in st.session_state:
-        st.session_state.language = "العربية"
+        st.session_state.language = "EN"
         
-    if "current_portal" not in st.session_state:
-        st.session_state.current_portal = 1
+    # 2. Central Navigation Variable Pointer (Synchronized with core/router.py)
+    if "current_page" not in st.session_state:
+        st.session_state.current_page = "Main Dashboard"
         
+    # 3. Purged Absolute Zero Audit Pipeline Log Sequence
     if "audit_log" not in st.session_state:
         st.session_state.audit_log = []
         
+    # 4. Sovereign User Identity Registration Profile (Fully Cleaned & Staged)
     if "user_identity" not in st.session_state:
         st.session_state.user_identity = {
             "registered": False,
             "full_name": "",
-            "rank_title": "مواطن / مقاول",
+            "rank_title": "Guest Contributor",
             "national_id": "",
             "syndicate_id": "",
-            "avatar_url": "https://unsplash.com",
-            "days_left": 365,
+            "avatar_url": "",
+            "days_left": 0.0,  # Enforced clean 0.0 float baseline boundary [1.1]
             "projects_list": []
         }
         
+    # 5. Zero-State Regional GIS Property Boundary Footprints
     if "property_data" not in st.session_state:
         st.session_state.property_data = {
-            "governorate": "Baghdad",
+            "governorate": "",
             "district": "",
             "zoning_type": "",
-            "is_compliant": True,
-            "built_area": 0.0,
+            "is_compliant": False,
+            "built_area": 0.0,  # Enforced clean 0.0 float baseline boundary [1.1]
             "floors": 0
         }
 
-def log_action(user, action_details):
+def log_action(user_credential: str, action_details: str):
+    """
+    Isolated backend event logging interceptor using standardized timestamp tracking.
+    """
     import datetime
-    st.session_state.audit_log.append({
-        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "user": user,
-        "action": action_details
-    })
+    if "audit_log" in st.session_state:
+        st.session_state.audit_log.append({
+            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "user": user_credential,
+            "action": action_details
+        })
