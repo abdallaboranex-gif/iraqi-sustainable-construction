@@ -1,14 +1,14 @@
 import streamlit as st
 from engines.code_compliance import verify_site_compliance
-from utils.localization import get_text # استيراد دالة الترجمة الفورية الشاملة
+from utils.localization import get_text
 
 def render_portal_1():
     """
-    واجهة الباب الأول المترجمة بالكامل للغات الثلاث (العربية، الكردية، الإنكليزية).
-    تم تصفير كافة المدخلات والـ 13 حقل لتفتح بيضاء وفارغة تماماً أمام المستخدم [١.١].
+    واجهة الباب الأول المطهرة بالكامل والمربوطة بالمقبض اللغوي الموحد.
+    تفتح بيضاء وفارغة تماماً وتترجم كافة الحقول الـ 13 ديناميكياً [١.١].
     """
-    # ربط عنوان وشرح البوابة بالقاموس ليتغير لحظياً عند تحويل زر اللغات
-    st.markdown(f"<h2 style='color: #1D4ED8; font-size: 22px; margin-bottom: 5px; font-weight:800;'>{get_text('title_p1')}</h2>", unsafe_allow_html=True)
+    # ربط العنوان والشرح بدالة get_text لتتغير فورا مع لغة المتصفح
+    st.markdown(f"<h2 style='color: #1D4ED8; font-size: 22px; margin-bottom: 5px; font-weight: 800;'>{get_text('title_p1')}</h2>", unsafe_allow_html=True)
     st.markdown(f"<p style='color: #0F172A; font-size: 13px;'>{get_text('desc_p1')}</p>", unsafe_allow_html=True)
     
     with st.container(border=True):
@@ -16,10 +16,8 @@ def render_portal_1():
         
         c1, c2, c3 = st.columns(3)
         with c1:
-            # القائمة المنسدلة تفتح بدون خيار محدد مسبقاً (تنتظر اختيار المستخدم)
             gov = st.selectbox(get_text("lbl_gov"), ["", "بغداد", "نينوى", "البصرة", "أربيل", "صلاح الدين", "الأنبار", "بابل", "النجف"], index=0)
         with c2:
-            # حقل القضاء فارغ تماماً ويمسح أي نصوص افتراضية مسبقة
             district = st.text_input(get_text("lbl_district"), placeholder="مثال: الكرخ / المنصور", value="")
         with c3:
             zoning = st.selectbox(get_text("lbl_zoning"), ["", "سكني صرف", "تجاري", "صناعي", "زراعي مشمول", "حكومي / خدمي"], index=0)
@@ -28,7 +26,6 @@ def render_portal_1():
         with c4:
             plot_num = st.text_input(get_text("lbl_plot"), placeholder="مثال: 4/12 م10 داوودي", value="")
         with c5:
-            # القيمة الابتدائية 0.0 لتجبر المستخدم على كتابة المساحة الحقيقية بيده
             total_area = st.number_input(get_text("lbl_area"), min_value=0.0, value=0.0, step=10.0)
         with c6:
             built_area = st.number_input(get_text("lbl_built_area"), min_value=0.0, value=0.0, step=10.0)
@@ -55,11 +52,11 @@ def render_portal_1():
         st.markdown("<br>", unsafe_allow_html=True)
         structural_system = st.selectbox(get_text("lbl_structure"), ["", "هيكل خرساني مسلّح", "جدران حاملة", "هيكل حديدي", "مختلط / خاص"], index=0)
         st.markdown("<br>", unsafe_allow_html=True)
-        # ربط اسم زر التشغيل بالقاموس ليتغير حسب اللغة المختارة
+        # ربط اسم زر التشغيل بالقاموس الموحد ليتغير لحظياً حسب اللغة المختارة
         submit_filter = st.button(get_text("btn_trigger_compliance"), use_container_width=True)
         
         if submit_filter:
-            # صمام أمان حازم لمنع الضغط والتشغيل على حقول فارغة أو بقيمة صفر
+            # صمام أمان حازم ومنظف لمنع الضغط والتشغيل على حقول فارغة أو بقيمة صفر
             if not gov or not district or not zoning or total_area == 0.0 or floors == 0:
                 st.warning(get_text("warning_empty_fields"))
             else:
