@@ -27,7 +27,8 @@ def main():
     Main Executive Entrypoint for the Iraqi Green Construction Data Platform.
     Strictly follows the platform design rules:
     - 100% Pure Standard English keys passed to get_text()
-    - High-contrast typography & safe structural modern navigation component
+    - Simplified visual titles: Extracted portal prefixes and word 'Portal' [image_8Qvxe9.png]
+    - Premium light-theme high-contrast visualization elements (#0F172A navy elements)
     """
     
     # 1. Initialize global state variables (language management and session locking)
@@ -82,15 +83,15 @@ def main():
     with st.sidebar:
         st.markdown(f'<div class="sidebar-title">🧭 {get_text("Platform Navigation")}</div>', unsafe_allow_html=True)
         
-        # Dictionary Mapping matching the exact english router navigation keys
+        # Pure Mapping Matrix completely simplified to clear numeric labels and words [image_8Qvxe9.png]
         navigation_options = {
             f"📊 {get_text('Main Dashboard')}": "Main Dashboard",
-            f"🧱 {get_text('Portal 1: Base Compliance')}": "Portal 1: Base Compliance",
-            f"🌱 {get_text('Portal 2: Sustainability')}": "Portal 2: Sustainability",
-            f"📈 {get_text('Portal 3: Data Aggregator')}": "Portal 3: Data Aggregator",
-            f"🗺️ {get_text('Portal 4: GIS Spatial Map')}": "Portal 4: GIS Spatial Map",
-            f"🏗️ {get_text('Portal 5: Sustainable Infrastructure')}": "Portal 5: Sustainable Infrastructure",
-            f"🛡️ {get_text('Portal 6: Site Safety')}": "Portal 6: Site Safety"
+            f"🧱 {get_text('Base Compliance')}": "Portal 1: Base Compliance",
+            f"🌱 {get_text('Sustainability')}": "Portal 2: Sustainability",
+            f"📈 {get_text('Data Aggregator')}": "Portal 3: Data Aggregator",
+            f"🗺️ {get_text('GIS Spatial Map')}": "Portal 4: GIS Spatial Map",
+            f"🏗️ {get_text('Sustainable Infrastructure')}": "Portal 5: Sustainable Infrastructure",
+            f"🛡️ {get_text('Site Safety')}": "Portal 6: Site Safety"
         }
         
         # Calculate current visible key to keep select box state locked correctly upon reruns
