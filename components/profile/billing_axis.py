@@ -70,5 +70,6 @@ def render_billing_axis():
     with r1_c2: st.write("2026-05-15")
     with r1_c3: st.write("$1,200.00")
     with r1_c4: 
-        # Clean native vector stream file downloader to download invoice records safely [1.1]
-        st.download_button(label=get_text("PDF"), data=b"Mock Invoice Content Trace", file_name="INV-2026-004.pdf", key="btn_dl_inv_004", size="small")
+ # [تصحيح هندسي صارم] حذف المعامل غير المدعوم size لحل خطأ الـ TypeError فوراً
+     st.download_button(label=get_text("PDF"), data=b"Mock Invoice Content Trace", file_name="INV-2026-004.pdf", key="btn_dl_inv_004", use_container_width=True)
+
