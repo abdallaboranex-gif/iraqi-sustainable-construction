@@ -18,12 +18,12 @@ def fetch_cached_translation(text: str, target_lang: str) -> str:
 
 def get_text(english_key: str) -> str:
     """
-    Universal Localization Engine Middleware.
+    Universal Localization Engine Middleware (Optimized Dual-Language Blueprint).
     Strictly follows the Iraqi Green Construction Data Platform architecture:
     - 100% Pure Standard English keys processed dynamic on-the-fly [1.1]
     - Zero static dictionary clutter or hardcoded manual arrays [1.1]
-    - Dynamic session switching between Arabic (العربية) and Kurdish (كردي) [1.1]
-    - Wrapped around fetch_cached_translation to deliver instant zero-lag rendering [1.1]
+    - Streamlined to support pure English (EN) and Arabic (العربية) only [1.1]
+    - Dynamic session switching with zero-lag memory caching infrastructure [1.1]
     """
     # Safeguard 1: Safe fallback if session state variables are momentarily uninitialized
     if "language" not in st.session_state:
@@ -31,18 +31,16 @@ def get_text(english_key: str) -> str:
 
     selected_language = st.session_state.language
 
-    # Structural mapping matrix to convert platform session choices to ISO-639 codes
+    # Structural mapping matrix optimized for dual-language sovereignty
     if selected_language == "العربية":
         target_iso = "ar"
-    elif selected_language == "كردي":
-        target_iso = "ku"
     else:
-        # Fallback benchmark for pure English or unrecognized language configurations
+        # If English is selected, return the standard pure key instantly in 0.0 seconds
         return english_key
 
     # Safeguard 2: Instantly bypass empty keys or whitespace inputs to protect network socket
     if not english_key.strip():
         return english_key
 
-    # Trigger the highly accelerated cached memory query engine
+    # Trigger the highly accelerated cached memory query engine for Arabic translation
     return fetch_cached_translation(text=english_key, target_lang=target_iso)
