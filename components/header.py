@@ -2,25 +2,34 @@ import streamlit as st
 from utils.localization import get_text
 from core.state_manager import log_action
 
+def handle_language_switch():
+    """
+    Sovereign Language Callback Subroutine.
+    Executes safely in the backend thread context BEFORE the UI redraws.
+    Completely eliminates double-triggering lag and interface freezing loops [1.1].
+    """
+    # Capture the freshly selected token from the temporary bridge widget
+    new_lang = st.session_state.get("temp_lang_selector")
+    if new_lang:
+        # Commit the choice securely to the sovereign central source of truth
+        st.session_state.language = new_lang
+
 def render_header():
     """
     Component: Sovereign Top Header & Secure Digital Identity Navigation Bar.
     Strictly follows the Iraqi Green Construction Data Platform architecture:
     - 100% Pure Standard English keys passed to get_text() [1.1]
     - Streamlined to support pure English (EN) and Arabic (العربية) only [1.1]
-    - Complete stabilization of the interactive segmented language controllers [1.1]
-    - Rectified truncated logic from the old legacy file implementation
+    - Decouples state changes via handle_language_switch callback to resolve lag permanently [1.1]
     """
     user_data = st.session_state.user_identity
     
-    # Dynamic identity attributes driven exclusively by the localization wrapper
     display_name = user_data["full_name"] if user_data["registered"] else get_text("Unregistered Account")
     display_rank = user_data["rank_title"] if user_data["registered"] else get_text("Click to Verify Identity")
 
-    # High-contrast horizontal structural layout configuration
     col_brand, col_context, col_user = st.columns([2.6, 1.8, 1.6], gap="small")
     
-    # Left Column: Platform Title Block
+    # Left Column: Brand Identity
     with col_brand:
         st.markdown(
             f"""
@@ -39,7 +48,7 @@ def render_header():
             unsafe_allow_html=True
         )
         
-    # Middle Column: Regional Geolocation Card & Sovereign Dual-Language Controller
+    # Middle Column: Geolocation & Optimized Dual-Language Control Pipeline
     with col_context:
         sub_col1, sub_col2 = st.columns(2)
         with sub_col1:
@@ -56,27 +65,21 @@ def render_header():
         with sub_col2:
             st.markdown(f"<span style='color: #0F172A; font-size: 12px !important; font-weight: 700; display: block; margin-top: 2px; text-align: center;'>{get_text('Language')}</span>", unsafe_allow_html=True)
             
-            # Optimized Mapping Array excluding Kurdish for strict performance compliance
             lang_options = ["العربية", "EN"]
-            current_selection = st.session_state.get("language", "العربية")
+            current_lang = st.session_state.get("language", "العربية")
+            default_idx = 1 if current_lang == "EN" else 0
             
-            # Binary fallback switch index
-            default_idx = 1 if current_selection == "EN" else 0
-            
-            # Segmented switch directly interacting with the key="language" session engine
-            selected_lang = st.segmented_control(
+            # SAFE ISOLATED WIDGET: Intercepts input and updates state via Callback before page reruns
+            st.segmented_control(
                 label="Language Selector", 
                 options=lang_options, 
                 default=lang_options[default_idx], 
                 label_visibility="collapsed", 
-                key="language"
+                key="temp_lang_selector",
+                on_change=handle_language_switch
             )
-            
-            # Secure immediate rerouting to clear any remaining layout lag traces
-            if selected_lang != current_selection:
-                st.rerun()
 
-    # Right Column: Live User Avatar Display & Secure Credentials Trigger
+    # Right Column: User Profile Details
     with col_user:
         st.markdown(
             f"""
@@ -94,7 +97,7 @@ def render_header():
         if st.button(get_text("Click to Verify Identity"), key="open_profile_drawer", use_container_width=True):
             st.session_state.show_profile_drawer = True
             
-    # Trigger the Sovereign Documentation and Legal Accountability Sidebar Canvas
+    # Legal Accountability Sidebar
     if st.session_state.get("show_profile_drawer", False):
         with st.sidebar:
             if st.button(get_text("Close & Return"), use_container_width=True):
@@ -104,7 +107,6 @@ def render_header():
             st.markdown(f"## {get_text('Documentation & Legal Accountability Portal')}")
             st.markdown(f"<p style='color: #475569; font-size: 12px;'>{get_text('Official IDs must be uploaded to bear full legal accountability for the data and engineering blueprints.')}</p>", unsafe_allow_html=True)
             
-            # State 1: Identity Registration Canvas
             if not user_data["registered"]:
                 st.markdown(f"<h4 style='color: #1D4ED8; font-size: 15px; margin-top: 10px;'>{get_text('Create Register:')}</h4>", unsafe_allow_html=True)
                 input_name = st.text_input(get_text("User's Full Quadruple Name:"), placeholder="Eng. Abdulla Omar")
@@ -131,8 +133,6 @@ def render_header():
                         st.rerun()
                     else:
                         st.warning(get_text("Required Fields!"))
-                        
-            # State 2: Secure Verified Profile Management Panel
             else:
                 st.markdown(f"<h4 style='color: #10B981; font-size: 15px; margin-top: 10px;'>✔️ {get_text('Identity Verified Status')}</h4>", unsafe_allow_html=True)
                 st.text_input(get_text("Registered Operator Nominee"), value=user_data["full_name"], disabled=True)
