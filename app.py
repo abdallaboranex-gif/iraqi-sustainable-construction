@@ -18,17 +18,48 @@ st.set_page_config(
 
 # Core Architectural Imports from the purged baseline modules
 from core.state_manager import initialize_session_state
-from core.router import render_active_view, navigate_to
+from core.router import navigate_to
 from utils.localization import get_text
 from components.header import render_header
+
+# Import all portal renders for direct left-hand injection
+from views.main_dashboard import render_main_dashboard
+from views.portal_1_compliance import render_portal_1_compliance
+from views.portal_2_sustainability import render_portal_2_sustainability
+from views.portal_3_aggregator import render_portal_3_aggregator
+from views.portal_4_gis_map import render_portal_4_gis_map
+from views.portal_5_infrastructure import render_portal_5_infrastructure
+from views.portal_6_site_safety import render_portal_6_site_safety
+
+def render_split_active_portal():
+    """
+    Sub-router execution engine that injects the selected input portal 
+    strictly inside the left-hand column frame context.
+    """
+    active_page = st.session_state.current_page
+    
+    if active_page == "Portal 1: Base Compliance":
+        render_portal_1_compliance()
+    elif active_page == "Portal 2: Sustainability":
+        render_portal_2_sustainability()
+    elif active_page == "Portal 3: Data Aggregator":
+        render_portal_3_aggregator()
+    elif active_page == "Portal 4: GIS Spatial Map":
+        render_portal_4_gis_map()
+    elif active_page == "Portal 5: Sustainable Infrastructure":
+        render_portal_5_infrastructure()
+    elif active_page == "Portal 6: Site Safety":
+        render_portal_6_site_safety()
+    else:
+        # If Main Dashboard itself is chosen, show a welcoming notification in the input frame
+        st.info(get_text("System Baseline Active: Select an analytical compliance portal from navigation to initiate data log inputs."))
 
 def main():
     """
     Main Executive Entrypoint for the Iraqi Green Construction Data Platform.
-    Strictly follows the platform design rules:
-    - 100% Pure Standard English keys passed to get_text() [1.1]
-    - Aligned with verified translations blueprint to eliminate automated cloud leakage [1.1]
-    - Premium light-theme high-contrast visualization elements (#0F172A navy text elements)
+    Strictly coordinates the Split-Screen Architecture:
+    - Left Column (45%): Dynamic Input Canvas Portals
+    - Right Column (55%): Fixed Telemetry Dashboard Panel & Core Analytics Matrix
     """
     
     # 1. Initialize global state variables (language management and session locking)
@@ -61,7 +92,7 @@ def main():
             border-bottom: 2px solid #F1F5F9;
         }
         
-        /* Modern Select Option Facelift - Darker Typography & Premium Interaction */
+        /* Modern Select Option Facelift */
         div[data-baseweb="select"] > div {
             border-radius: 12px !important;
             border: 1px solid #CBD5E1 !important;
@@ -70,7 +101,7 @@ def main():
         }
         
         div[data-baseweb="select"] * {
-            color: #0F172A !important; /* Thick sharp elements */
+            color: #0F172A !important;
             font-weight: 700 !important;
             font-size: 14px !important;
         }
@@ -83,7 +114,7 @@ def main():
     with st.sidebar:
         st.markdown(f'<div class="sidebar-title">🧭 {get_text("Platform Navigation")}</div>', unsafe_allow_html=True)
         
-        # Mapping matrix relying on clean Single-Word tokens matched to JSON keys [1.1]
+        # Hard-locked options mapping matrix to ensure strict alignment with core dictionary keys
         navigation_options = {
             f"📊 {get_text('Main Dashboard')}": "Main Dashboard",
             f"🧱 {get_text('Compliance Audits')}": "Portal 1: Base Compliance",
@@ -94,7 +125,6 @@ def main():
             f"🛡️ {get_text('Site Safety')}": "Portal 6: Site Safety"
         }
         
-        # Calculate current visible key to keep select box state locked correctly upon reruns
         current_page_state = st.session_state.current_page
         default_index = 0
         
@@ -103,7 +133,6 @@ def main():
                 default_index = idx
                 break
                 
-        # Premium unified selection menu container
         selected_display_label = st.selectbox(
             label="Navigation Switcher Matrix",
             options=list(navigation_options.keys()),
@@ -112,15 +141,24 @@ def main():
             key="navigation_selectbox_trigger"
         )
         
-        # Map user input directly back to sovereign router keys safely
         target_page_key = navigation_options[selected_display_label]
         
-        # Route seamlessly if status selection drifts from current thread layout
         if target_page_key != current_page_state:
             navigate_to(target_page_key)
                 
-    # 5. Delegate structural view rendering exclusively to the isolated routing module
-    render_active_view()
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # 5. CORE SPLIT-SCREEN GRID CONFIGURATION (Pure Streamlit Architecture)
+    # Allocating 4.5 ratio units to Inputs Canvas, and 5.5 ratio units to Live Telemetry
+    col_input_canvas, col_live_telemetry = st.columns([4.5, 5.5], gap="large")
+    
+    # LEFT PANEL FRAME (45%): Dynamic Input Portals Context
+    with col_input_canvas:
+        render_split_active_portal()
+        
+    # RIGHT PANEL FRAME (55%): Fixed Live Dashboard Metrics Monitors Global Track
+    with col_live_telemetry:
+        render_main_dashboard()
 
 if __name__ == "__main__":
     main()
