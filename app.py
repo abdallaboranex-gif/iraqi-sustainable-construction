@@ -1,6 +1,6 @@
 import streamlit as st
 
-# 1. إعدادات الصفحة الأساسية وتأكيد التصميم العريض الفخم
+# 1. Page Configuration for Wide Layout
 st.set_page_config(
     page_title="Iraqi Green Construction Data Platform",
     page_icon="🏗️",
@@ -8,7 +8,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. حقن تصميم CSS لتطابق بصري كامل بالثيم المشرق الناصع والحروف الكحلية الغامقة الحادة
+# 2. Premium CSS Injection for Light Theme and High-Contrast Typography
 st.markdown(
     """
     <link rel="preconnect" href="https://googleapis.com">
@@ -16,13 +16,13 @@ st.markdown(
     <link href="https://googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* إعداد الخلفية العامة للمتصفح باللون الثلجي الناعم وتثبيت الخط */
+        /* Global Background and Typography Sync */
         html, body, [data-testid="stAppViewContainer"] {
             background-color: #F1F5F9 !important;
             font-family: 'Tajawal', sans-serif !important;
         }
         
-        /* تغميق الحروف والنصوص بالكامل للون الكحلي الداكن الحاد ورفع الوزن للوضوح */
+        /* Dark Navy Typography for Maximum Readability */
         p, span, label, .stMarkdown, [data-testid="stWidgetLabel"] p {
             font-family: 'Tajawal', sans-serif !important;
             font-size: 16px !important;
@@ -30,14 +30,14 @@ st.markdown(
             color: #0F172A !important;
         }
         
-        /* تفخيم وتشديد العناوين الكبرى باللون الأسود الملكي الحاد */
+        /* Deep Bold Titles and Accents */
         h1, h2, h3, h4, strong {
             font-family: 'Tajawal', sans-serif !important;
             color: #020617 !important;
             font-weight: 800 !important;
         }
         
-        /* صياغة الكروت والحاويات بخلفية بيضاء وحواف دائرية ناعمة جداً وظلال عائمة عريضة */
+        /* Container Cards Styling with Smooth Shadow */
         [data-testid="stElementContainer"] > div[data-testid="stVerticalBlockBorderContainer"] {
             border: 1px solid #CBD5E1 !important;
             border-radius: 16px !important;
@@ -47,7 +47,7 @@ st.markdown(
             margin-bottom: 15px !important;
         }
         
-        /* تحسين مظهر أزرار الأبواب الستة لتكون مصفوفة فخمة وسلسة التصفح بوزن غامق */
+        /* Portal Navigation Buttons Premium Styling */
         .stButton > button {
             border-radius: 10px !important;
             border: 1px solid #94A3B8 !important;
@@ -59,7 +59,7 @@ st.markdown(
             transition: all 0.25s ease !important;
         }
         
-        /* تأثير الزر النشط حالياً ليميل للأزرق الملكي المشرق العالي التباين */
+        /* High Contrast Royal Blue for Active States */
         .stButton > button[data-testid="baseButton-primary"] {
             background-color: #1D4ED8 !important;
             color: #FFFFFF !important;
@@ -69,34 +69,33 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-# 3. استيراد المكونات المستقلة والنواة المركزية وأداة الترجمة الفورية الشاملة
+# 3. Core Framework Imports and Automated Localization Pipeline Ingestion
 from core.state_manager import init_session_state
 from core.router import route_to_view
 from components.header import render_header
 from components.footer import render_footer
 from components.analytics_cards import render_side_analytics
-from utils.localization import get_text # استيراد دالة الترجمة
+from utils.localization import get_text
 
-# 4. تهيئة ذاكرة الجلسة
+# 4. Initialize Core Session Parameters
 init_session_state()
 
-# 5. بناء وتشغيل الشريحة العليا الفخمة والمشرقة (تضم الصورة وصندوق الموقع الأبيض)
+# 5. Execute Sovereign Header (Includes Logo, Location Frame, and Language Selector)
 render_header()
 
 st.markdown("<hr style='border-color: #CBD5E1; margin: 15px 0;'>", unsafe_allow_html=True)
 
-# 6. [تحديث حركي] ربط عنوان لوحة التحكم بالقاموس المترجم لحظياً باللغات الثلاث
-st.markdown(f"<h4 style='color: #0F172A; font-size: 17px !important; margin-bottom: 12px; font-weight:800;'>{get_text('nav_title')}</h4>", unsafe_allow_html=True)
+# 6. Navigation Interface Section (100% Pure English source strings mapped to Translation Engine)
+st.markdown(f"<h4 style='color: #0F172A; font-size: 17px !important; margin-bottom: 12px; font-weight:800;'>{get_text('Sovereign Control Panel')}</h4>", unsafe_allow_html=True)
 
 nav_cols = st.columns(6)
-# [تحديث حركي للغات] ربط أسماء الأزرار الستة بالدالة لتسحب الكلمة فوراً حسب خيار المستخدم
 portals_titles = [
-    get_text("btn_portal_1"),
-    get_text("btn_portal_2"),
-    get_text("btn_portal_3"),
-    get_text("btn_portal_4"),
-    get_text("btn_portal_5"),
-    get_text("btn_portal_6")
+    get_text("Portal 1: Site Analysis & Municipal Constraints"),
+    get_text("Portal 2: Energy & Green Score"),
+    get_text("Portal 3: Central Materials BOQ"),
+    get_text("Portal 4: Iraq GIS Map View"),
+    get_text("Portal 5: Finance & Payback"),
+    get_text("Portal 6: Field Site Safety")
 ]
 
 for idx, col in enumerate(nav_cols):
@@ -115,7 +114,7 @@ for idx, col in enumerate(nav_cols):
 
 st.markdown("<hr style='border-color: #CBD5E1; margin: 15px 0;'>", unsafe_allow_html=True)
 
-# 7. تقسيم القسم الوسطي للشاشة بالطول إلى عمودين متوازيين ومطابقين للصورة الهيكلية مئة بالمئة
+# 7. Split Central Screen Layout Into Parallel Functional Columns
 col_main, col_side = st.columns([2.8, 1.2], gap="large")
 
 with col_main:
@@ -127,5 +126,5 @@ with col_side:
 st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("<hr style='border-color: #CBD5E1; margin: 15px 0;'>", unsafe_allow_html=True)
 
-# 8. تشغيل تذييل الصفحة الموحد المترجم في القاع
+# 8. Render Global Standard Framework Footer
 render_footer()
