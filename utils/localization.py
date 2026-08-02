@@ -1,12 +1,24 @@
 import streamlit as st
+from deep_translator import GoogleTranslator
+
+@st.cache_data(show_spinner=False, max_entries=1000, ttl=86400)
+def fetch_online_fallback_translation(text: str, target_lang: str) -> str:
+    """
+    Emergency online translator fallback to process remaining fields 
+    across all portals and dashboard metrics dynamically.
+    """
+    try:
+        translated = GoogleTranslator(source='en', target=target_lang).translate(text)
+        return translated if translated else text
+    except Exception:
+        return text
 
 def get_text(english_key: str) -> str:
     """
-    Universal Localization Engine Middleware (Sovereign Static Override Blueprint).
+    Universal Localization Engine Middleware (Hybrid Sovereign Architecture).
     Strictly follows the Iraqi Green Construction Data Platform architecture:
-    - 100% Pure Standard English keys passed to get_text() from app.py [1.1]
-    - Completely bypasses external cloud translator latency and memory cache locks [1.1]
-    - Delivers exact, pixel-perfect official Iraqi green building terminology [1.1]
+    - Enforces exact user-defined official nomenclature for top-level navigation.
+    - Routes all remaining dynamic form text inputs to the cached translation pipeline.
     """
     # Safeguard 1: Safe fallback if session state variables are momentarily uninitialized
     if "language" not in st.session_state:
@@ -18,7 +30,10 @@ def get_text(english_key: str) -> str:
     if selected_language != "العربية":
         return english_key
 
-    # Core Sovereign Translation Matrix - Hard-locked to eliminate any automated cloud distortion
+    if not english_key.strip():
+        return english_key
+
+    # 1. HARD-LOCKED SOVEREIGN DICTIONARY (Takes absolute precedence for exact text execution)
     sovereign_dictionary = {
         "Platform Navigation": "لوحة التنقل في المنصة",
         "Main Dashboard": "لوحة التحكم الرئيسية",
@@ -35,5 +50,9 @@ def get_text(english_key: str) -> str:
         "Close & Return": "إغلاق والعودة"
     }
 
-    # Safeguard 2: Return the mapped token if exists, otherwise fallback safely to the english key
-    return sovereign_dictionary.get(english_key, english_key)
+    # If the key is officially defined in our sovereign core block, return it immediately (0.0ms)
+    if english_key in sovereign_dictionary:
+        return sovereign_dictionary[english_key]
+
+    # 2. AUTOMATED CASCADE (Translates the rest of the building portals automatically via cloud network)
+    return fetch_online_fallback_translation(text=english_key, target_lang="ar")
