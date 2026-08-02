@@ -16,7 +16,7 @@ def render_user_profile_tabs():
     - Maps and loads the 5 independent axes concurrently inside clean tabs frames [1.1]
     """
     
-    # بناء شريط التبويبات الخمسة العصرية عالية التباين لنسخة الشركات والمستقلين
+    # بناء شريط التبويبات الخمسة العصرية عالية التباين لنسخة الشركات والأفراد
     tab_personal, tab_professional, tab_subscription, tab_security, tab_billing = st.tabs([
         get_text("Personal Info"),
         get_text("Professional Info"),
@@ -37,7 +37,7 @@ def render_user_profile_tabs():
     with tab_subscription:
         render_subscription_axis()
         
-    # 4. التبويب الرابع: تغيير كلمة المرور والـ 2FA وسجل الأجهزة
+    # 4. التبويب الرابع: تفعيل محور الأمان واستدعاء بوابة المالك السرية
     with tab_security:
         render_security_axis()
         
