@@ -9,54 +9,117 @@ def handle_language_switch():
 
 def render_header():
     """
-    هيدر مبسط ومضخم الخطوط يعتمد على توزيع الأعمدة القياسي الصافي.
+    Sovereign Clean Header.
+    Eliminates st.metric bugs and layout drift by relying entirely on 
+    native crisp dark navy typography and standard safe layout matrices.
     """
     user_data = st.session_state.user_identity
     display_name = user_data["full_name"] if user_data["registered"] else get_text("Unregistered Account")
     display_rank = user_data["rank_title"] if user_data["registered"] else get_text("Click to Verify Identity")
     current_gov = st.session_state.property_data.get("governorate", "Baghdad")
 
-    # حقن كود صارم لتكبير وتغميق كافة نصوص الهيدر والـ metrics
+    # حقن ستايل صارم لتوحيد الألوان كحلي داكن جداً وضمان المحاذاة الكاملة
     st.markdown(
         """
         <style>
-        /* تكبير وتغميق نصوص المنصة بالكامل */
-        .stMarkdown div p, .stMarkdown div h2, .stMarkdown div h3, .stMarkdown div h4 {
+        .header-main-title {
             color: #0F172A !important;
-            font-size: 20px !important;
+            font-size: 24px !important;
             font-weight: 900 !important;
+            margin: 0 !important;
+            line-height: 1.2 !important;
         }
-        /* تكبير وتغميق أرقام بطاقة الموقع الحالي */
-        [data-testid="stMetricValue"] {
-            font-size: 26px !important;
-            font-weight: 900 !important;
-            color: #1D4ED8 !important;
-        }
-        /* تكبير وتغميق عناوين بطاقات المقياس */
-        [data-testid="stMetricLabel"] p {
-            font-size: 14px !important;
+        .header-sub-title {
+            color: #0F172A !important;
+            font-size: 16px !important;
             font-weight: 800 !important;
+            margin: 4px 0 0 0 !important;
+        }
+        .header-slogan-text {
             color: #475569 !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            letter-spacing: 1px !important;
+            margin: 6px 0 0 0 !important;
+        }
+        
+        /* بطاقة الموقع الموحدة البديلة النظيفة */
+        .clean-location-card {
+            text-align: center !important;
+            margin-top: 10px !important;
+        }
+        .clean-location-label {
+            color: #475569 !important;
+            font-size: 13px !important;
+            font-weight: 800 !important;
+            display: block !important;
+        }
+        .clean-location-value {
+            color: #1D4ED8 !important;
+            font-size: 18px !important;
+            font-weight: 900 !important;
+            display: block !important;
+            margin-top: 4px !important;
+        }
+        
+        /* لوحة هوية المستخدم اليسرى المنسقة */
+        .clean-user-panel {
+            text-align: right !important;
+            margin-top: 2px !important;
+        }
+        .clean-user-name {
+            color: #0F172A !important;
+            font-size: 16px !important;
+            font-weight: 900 !important;
+            display: block !important;
+        }
+        .clean-user-rank {
+            color: #475569 !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+            display: block !important;
+            margin-top: 2px !important;
+        }
+        
+        /* أيقونة المستخدم البديلة النظيفة المسطحة لمنع علامة الصورة المكسورة */
+        .flat-user-avatar {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="%231D4ED8"><path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 2 12 2ZM12 4C14.2091 4 16 5.79086 16 8C16 10.2091 14.2091 12 12 12C9.79086 12 8 10.2091 8 8C8 5.79086 9.79086 4 12 4ZM12 14C16.4183 14 20 16.4183 20 19H4C4 16.4183 7.58172 14 12 14Z"/></svg>');
+            display: inline-block;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid #1D4ED8;
         }
         </style>
         """,
         unsafe_allow_html=True
     )
 
-    # تقسيم المساحات بالتساوي لإعطاء النصوص مساحة كاملة تمنع التداخل
-    col_brand, col_context, col_user = st.columns([4.0, 2.5, 2.5], gap="large")
+    # إعادة توزيع عرض الأعمدة بنسبة هندسية متوازنة تمنع الكبس والتداخل
+    col_brand, col_context, col_user = st.columns([3.6, 2.0, 2.4], gap="medium")
     
+    # --- العمود الأيمن: شعارات الهوية الحادة المغلظة ---
     with col_brand:
-        st.markdown(f"### Iraqi Green Construction Data Platform")
-        st.markdown(f"**{get_text('Iraqi Green Construction Data Platform')}**")
-        st.caption("DATA • COMPLIANCE • SUSTAINABILITY • EFFICIENCY")
+        st.markdown('<div class="header-main-title">Iraqi Green Construction Data Platform</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="header-sub-title">{get_text("Iraqi Green Construction Data Platform")}</div>', unsafe_allow_html=True)
+        st.markdown('<div class="header-slogan-text">DATA • COMPLIANCE • SUSTAINABILITY • EFFICIENCY</div>', unsafe_allow_html=True)
         
+    # --- العمود الأوسط: بطاقة الموقع الموحدة وأداة اللغة المصفاة ---
     with col_context:
-        sub_col1, sub_col2 = st.columns(2)
-        with sub_col1:
-            st.metric(label=get_text("Current Location"), value=f"📍 {current_gov}")
-        with sub_col2:
-            st.markdown(f"**{get_text('Language')}**")
+        sub_col_loc, sub_col_lang = st.columns([1.0, 1.0], gap="small")
+        with sub_col_loc:
+            # تم حذف st.metric واستبدالها بحاوية نصية صافية وثابتة لا تنزلق
+            st.markdown(
+                f"""
+                <div class="clean-location-card">
+                    <span class="clean-location-label">{get_text('Current Location')}</span>
+                    <strong class="clean-location-value">📍 {get_text(current_gov)}</strong>
+                </div>
+                """, 
+                unsafe_allow_html=True
+            )
+        with sub_col_lang:
+            st.markdown(f"<span style='color: #0F172A; font-size: 13px !important; font-weight: 800; display: block; margin-top: 8px; text-align: center;'>{get_text('Language')}</span>", unsafe_allow_html=True)
             lang_options = ["العربية", "EN"]
             current_lang = st.session_state.get("language", "العربية")
             default_idx = 1 if current_lang == "EN" else 0
@@ -70,18 +133,28 @@ def render_header():
                 on_change=handle_language_switch
             )
 
+    # --- العمود الأيسر: هوية المستخدم المنسقة والأيقونة الرقمية المعاصرة ---
     with col_user:
-        sub_col_avatar, sub_col_btn = st.columns([1.0, 3.0])
-        with sub_col_avatar:
-            avatar_src = user_data["avatar_url"] if user_data["avatar_url"] else "https://unsplash.com"
-            st.image(avatar_src, width=55)
-        with sub_col_btn:
-            st.markdown(f"**{display_name}**")
-            st.caption(display_rank)
+        sub_col_text, sub_col_img = st.columns([2.2, 0.8])
+        with sub_col_text:
+            st.markdown(
+                f"""
+                <div class="clean-user-panel">
+                    <span class="clean-user-name">{display_name}</span>
+                    <span class="clean-user-rank">{display_rank}</span>
+                </div>
+                """, 
+                unsafe_allow_html=True
+            )
+        with sub_col_img:
+            # استدعاء أيقونة الـ SVG الزرقاء المعاصرة لمنع ظهور علامة الصورة المكسورة نهائياً
+            st.markdown('<div class="flat-user-avatar"></div>', unsafe_allow_html=True)
             
+        # زر التحقق أسفل الهوية بخط متناسق وعريض
         if st.button(get_text("Click to Verify Identity"), key="open_profile_drawer", use_container_width=True):
             st.session_state.show_profile_drawer = True
             
+    # نافذة شريط التدقيق القانوني الجانبية الحاكمة
     if st.session_state.get("show_profile_drawer", False):
         with st.sidebar:
             if st.button(get_text("Close & Return"), use_container_width=True):
