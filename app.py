@@ -16,49 +16,17 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Core Architectural Imports from the purged baseline modules
+# Core Architectural Imports from the centralized system controllers
 from core.state_manager import initialize_session_state
-from core.router import navigate_to
+from core.router import render_sovereign_split_layout, navigate_to
 from utils.localization import get_text
 from components.header import render_header
-
-# Import all portal renders for direct structural injection
-from views.main_dashboard import render_main_dashboard
-from views.portal_1_compliance import render_portal_1_compliance
-from views.portal_2_sustainability import render_portal_2_sustainability
-from views.portal_3_aggregator import render_portal_3_aggregator
-from views.portal_4_gis_map import render_portal_4_gis_map
-from views.portal_5_infrastructure import render_portal_5_infrastructure
-from views.portal_6_site_safety import render_portal_6_site_safety
-
-def render_split_active_portal():
-    """
-    Sub-router execution engine that injects the selected input portal 
-    strictly inside the right-hand column frame context (60% width).
-    Enforces Portal 1 as the default view when Main Dashboard is active.
-    """
-    active_page = st.session_state.current_page
-    
-    # Enforce Portal 1 inputs dynamically as the default view on initialization
-    if active_page == "Main Dashboard" or active_page == "Portal 1: Base Compliance":
-        render_portal_1_compliance()
-    elif active_page == "Portal 2: Sustainability":
-        render_portal_2_sustainability()
-    elif active_page == "Portal 3: Data Aggregator":
-        render_portal_3_aggregator()
-    elif active_page == "Portal 4: GIS Spatial Map":
-        render_portal_4_gis_map()
-    elif active_page == "Portal 5: Sustainable Infrastructure":
-        render_portal_5_infrastructure()
-    elif active_page == "Portal 6: Site Safety":
-        render_portal_6_site_safety()
 
 def main():
     """
     Main Executive Entrypoint for the Iraqi Green Construction Data Platform.
-    Strictly coordinates the Reversed Split-Screen Architecture:
-    - Left Column (40%): Fixed Telemetry Dashboard Panel & Core Analytics Matrix
-    - Right Column (60%): Dynamic Input Canvas Portals (Portal 1 by default)
+    Strictly cleaned and decoupled. Delegates 100% of spatial rendering 
+    and views distribution to core/router.py.
     """
     
     # 1. Initialize global state variables (language management and session locking)
@@ -67,21 +35,18 @@ def main():
     # 2. Render Global Sovereign Top Header & Digital ID sidebar
     render_header()
     
-    # 3. Inject premium dark-contrast sidebar typography styles and bolding overrides
+    # 3. Inject premium dark-contrast sidebar typography styles
     st.markdown(
         """
         <style>
-        /* Force ultra-deep high-contrast navy typography across text fields */
         [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
             color: #0F172A !important;
             font-weight: 800 !important;
         }
-        
         [data-testid="stSidebar"] {
             background-color: #FFFFFF !important;
             border-right: 1px solid #E2E8F0 !important;
         }
-        
         .sidebar-title {
             color: #0F172A !important;
             font-size: 19px;
@@ -90,15 +55,12 @@ def main():
             padding-bottom: 12px;
             border-bottom: 2px solid #F1F5F9;
         }
-        
-        /* Modern Select Option Facelift */
         div[data-baseweb="select"] > div {
             border-radius: 12px !important;
             border: 1px solid #CBD5E1 !important;
             padding: 4px !important;
             background-color: #F8FAFC !important;
         }
-        
         div[data-baseweb="select"] * {
             color: #0F172A !important;
             font-weight: 700 !important;
@@ -113,7 +75,7 @@ def main():
     with st.sidebar:
         st.markdown(f'<div class="sidebar-title">🧭 {get_text("Platform Navigation")}</div>', unsafe_allow_html=True)
         
-        # Hard-locked options mapping matrix relying on clean Single-Word tokens matched to JSON keys
+        # Mapping matrix for localized options matching centralized localization dictionary
         navigation_options = {
             f"📊 {get_text('Main Dashboard')}": "Main Dashboard",
             f"🧱 {get_text('Compliance Audits')}": "Portal 1: Base Compliance",
@@ -147,17 +109,8 @@ def main():
                 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 5. REVERSED SOVEREIGN SPLIT-SCREEN GRID CONFIGURATION (Pure Streamlit Architecture)
-    # Allocating 4.0 units to Left Telemetry View and 6.0 units to Right Inputs Canvas (60% Size Ratio)
-    col_live_telemetry, col_input_canvas = st.columns([4.0, 6.0], gap="large")
-    
-    # LEFT PANEL FRAME (40%): Fixed Live Dashboard Metrics Monitors Global Track
-    with col_live_telemetry:
-        render_main_dashboard()
-        
-    # RIGHT PANEL FRAME (60%): Dynamic Input Portals Context (Portal 1 loads automatically)
-    with col_input_canvas:
-        render_split_active_portal()
+    # 5. DELEGATE SPLIT EXECUTION ENTIRELY TO THE ROUTER (Absolute Separation of Concerns)
+    render_sovereign_split_layout()
 
 if __name__ == "__main__":
     main()
