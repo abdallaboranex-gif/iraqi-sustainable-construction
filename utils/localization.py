@@ -1,128 +1,30 @@
 import streamlit as st
+from deep_translator import GoogleTranslator
 
-# مستودع المصطلحات الموحد والمنظف بالملي ثانية لمطابقة مفاتيح الواجهة الـ 13
-LOCALES_POOL = {
-    "العربية": {
-        "platform_title": "منصة البناء المستدام",
-        "platform_sub": "الحوكمة الرقمية والامتثال البيئي",
-        "nav_title": "🎛️ لوحة التحكم السيادية للمنصة",
-        "current_location": "الموقع الحالي",
-        "lang_label": "اللغة",
-        "side_title": "📊 لوحة المؤشرات الحية",
-        "compliance_score": "المطابقة الهندسية / Compliance",
-        "integrity_score": "السلامة الإنشائية / Integrity",
-        "energy_score": "استدامة الطاقة / Energy Score",
-        "user_unregistered": "حساب غير مسجل",
-        "user_action_verify": "اضغط لتأكيد الهوية",
-        "btn_portal_1": "🚪 الباب 1\nالتدقيق والتربة",
-        "btn_portal_2": "🌱 الباب 2\nالطاقة والاستدامة",
-        "btn_portal_3": "📊 الباب 3\nحصر المواد المركزي",
-        "btn_portal_4": "🗺️ الباب 4\nخارطة GIS العراق",
-        "btn_portal_5": "💳 الباب 5\nالبنية والمالية",
-        "btn_portal_6": "🦺 الباب 6\nالسلامة الموقعية",
-        "title_p1": "📋 الباب الأول: تحليل الموقع ومحددات البلدية",
-        "desc_p1": "يرجى ملء الحقول الـ 13 بدقة لتحديد متطلبات فحص التربة والمدونات الهندسية الإلزامية للمشروع.",
-        "lbl_gov": "1. المحافظة",
-        "lbl_district": "2. القضاء / الناحية",
-        "lbl_zoning": "3. تصنيف جنس العقار (البلدية)",
-        "lbl_plot": "4. رقم القطعة والمقاطعة",
-        "lbl_area": "5. المساحة الكلية للأرض (متر مربع)",
-        "lbl_built_area": "6. مساحة البناء الطابقي (متر مربع)",
-        "lbl_floors": "7. عدد الطوابق الكلي",
-        "lbl_height": "8. الارتفاع الكلي للمبنى (متر)",
-        "lbl_basement": "9. هل يحتوي المبنى على سرداب (قبو)؟",
-        "lbl_offset_f": "10. الارتداد الأمامي القانوني (متر)",
-        "lbl_offset_s": "11. الارتدادات الجانبية والخلفية (متر)",
-        "lbl_adjacent": "12. طبيعة الملاصقة والأبنية المجاورة",
-        "lbl_structure": "13. النظام الإنشائي المقترح للهيكل",
-        "btn_trigger_compliance": "🚀 تشغيل محرك المطابقة الفوري وفحص القيود",
-        "warning_empty_fields": "⚠️ يرجى ملء كافة البيانات الجغرافية والإنشائية الـ 13 أولاً!",
-        "success_msg": "✅ تهانينا! المخطط الأولي مطابق تماماً لكافة قيود البناء والمدونات المعتمدة.",
-        "error_msg": "❌ تم رصد مخالفات صريحة لشروط البناء والمدونات الوطنية! تم تجميد المعاملة."
-    },
-    "EN": {
-        "platform_title": "Iraqi Green Construction Data Platform",
-        "platform_sub": "Digital Governance & Environmental Compliance",
-        "nav_title": "🎛️ Platform Sovereign Control Panel",
-        "current_location": "Current Location",
-        "lang_label": "Language",
-        "side_title": "📊 Live Indicators Panel",
-        "compliance_score": "Engineering Compliance",
-        "integrity_score": "Structural Integrity",
-        "energy_score": "Energy Score",
-        "user_unregistered": "Unregistered Account",
-        "user_action_verify": "Click to Verify Identity",
-        "btn_portal_1": "🚪 Portal 1\nZoning & Soil Test",
-        "btn_portal_2": "🌱 Portal 2\nEnergy & Green Score",
-        "btn_portal_3": "📊 Portal 3\nCentral Materials BOQ",
-        "btn_portal_4": "🗺️ Portal 4\nIraq GIS Map View",
-        "btn_portal_5": "💳 Portal 5\nFinance & Payback",
-        "btn_portal_6": "🦺 Portal 6\nField Site Safety",
-        "title_p1": "📋 Portal 1: Site Analysis & Municipal Constraints",
-        "desc_p1": "Please fill out the 13 fields accurately to determine codes.",
-        "lbl_gov": "1. Governorate",
-        "lbl_district": "2. District / Sub-district",
-        "lbl_zoning": "3. Land Zoning Type (Municipality)",
-        "lbl_plot": "4. Plot & Sector Number",
-        "lbl_area": "5. Total Land Area (sqm)",
-        "lbl_built_area": "6. Built-up Footprint Area (sqm)",
-        "lbl_floors": "7. Total Number of Floors",
-        "lbl_height": "8. Total Building Height (meters)",
-        "lbl_basement": "9. Does the building contain a basement?",
-        "lbl_offset_f": "10. Legal Front Offset (meters)",
-        "lbl_offset_s": "11. Side and Rear Offsets (meters)",
-        "lbl_adjacent": "12. Type of Adjacent Buildings",
-        "lbl_structure": "13. Proposed Structural System",
-        "btn_trigger_compliance": "🚀 Trigger Instant Compliance Engine",
-        "warning_empty_fields": "⚠️ Please fill out all 13 fields first!",
-        "success_msg": "✅ Congratulations! The initial blueprint complies with all restrictions and approved national codes.",
-        "error_msg": "❌ Explicit violations detected against municipal zoning and national codes! File frozen."
-    },
-    "كردي": {
-        "platform_title": "سەکۆی بیناسازی بەردەوام",
-        "platform_sub": "حوکمڕانی دیجیتاڵی و پابەندبوونی ژینگەیی",
-        "nav_title": "🎛️ لۆگۆی کۆنترۆڵی سیادی سەکۆکە",
-        "current_location": "شوێنی ئێستا",
-        "lang_label": "زمان",
-        "side_title": "📊 پانێڵی نیشاندەرە زیندووەکان",
-        "compliance_score": "گونجانی ئەندازیاری",
-        "integrity_score": "سەلامەتی پێکهاتەیی",
-        "energy_score": "بەردەوامی وزە",
-        "user_unregistered": "هەژماری تۆمارنەکراو",
-        "user_action_verify": "کلیک بکە بۆ ناسنامە",
-        "btn_portal_1": "🚪 دەروازەی ١\nپشکنینی خاک",
-        "btn_portal_2": "🌱 دەروازەی ٢\nوزە و بەردەوامی",
-        "btn_portal_3": "📊 دەروازەی ٣\nکۆکردنەوەی ماددەکان",
-        "btn_portal_4": "🗺️ دەروازەی ٤\nنەخشەی جی ئێس",
-        "btn_portal_5": "💳 دەروازەی ٥\nدارایی و قازانج",
-        "btn_portal_6": "🦺 دەروازەی ٦\nسەلامەتی مەیدانی",
-        "title_p1": "📋 دەروازەی یەکەم: شیکردنەوەی شوێن و سنووردارکردنی شارەوانی",
-        "desc_p1": "تکایە ١٣ خانەکە بە دروستی پڕبکەرەوە بۆ دیاریکردنی پێویستییەکانی پشکنینی خاک.",
-        "lbl_gov": "١. پارێزگا",
-        "lbl_district": "٢. قەزا / ناحیە",
-        "lbl_zoning": "٣. پۆلێنکردنی زەوی (شارەوانی)",
-        "lbl_plot": "٤. ژمارەی پارچە زەوی و کەرت",
-        "lbl_area": "٥. ڕووبەری گشتی زەوی (مەتر دووجا)",
-        "lbl_built_area": "٦. ڕووبەری بیناسازی نهۆمی (مەتر دووجا)",
-        "lbl_floors": "٧. ژمارەی گشتی نهۆمەکان",
-        "lbl_height": "٨. بەرزی گشتی بیناکە (مەتر)",
-        "lbl_basement": "٩. ئایا بیناکە ژێرزەمینی تێدایە؟",
-        "lbl_offset_f": "١٠. کشانەوەی پێشەوەی یاسایی (مەتر)",
-        "lbl_offset_s": "١١. کشانەوەی تەنیشت و دواوە (مەتر)",
-        "lbl_adjacent": "١٢. سروشتی تەنیشت و بینا هاوسێیەکان",
-        "lbl_structure": "١٣. سیستەمی پێکهاتەیی پێشنیارکراو بۆ چوارچێوەکە",
-        "btn_trigger_compliance": "🚀 دەستپێکردنی بزوێنەری هاوتاکردنی دەستبەجێ",
-        "warning_empty_fields": "⚠️ تکایە سەرەتا سەرجەم خانەکان پڕبکەرەوە!",
-        "success_msg": "✅ پیرۆزە! نەخشەی سەرەتایی بە تەواوی هاوتایە لەگەڵ سەرجەم بەربەستەکانی بیناسازی.",
-        "error_msg": "❌ سەرپێچی ئاشکرا لە مەرجەکانی بیناسازی دۆزرایەوە! مامەڵەکە بەسترا."
-    }
-}
-
-def get_text(key_code):
-    """مستقبل ومفسر المفاتيح المركزي الموثق سحابياً وبأعلى تباين بصرى للحروف [١.١]."""
-    if not key_code:
+def get_text(english_text):
+    """
+    Pure English Internationalization Middleware.
+    This module contains ZERO hardcoded Arabic or Kurdish words [١.١].
+    It translates the entire app dynamically from English into Arabic/Kurdish via Cloud API [١.١].
+    """
+    if not english_text:
         return ""
-    # جلب الخيار الفعال الحركي مباشرة من متغير النواة العام لمنع تشتت الكاش
+        
+    # Read the current language selection directly from the header widget ("العربية", "كردي", "EN")
     current_lang = st.session_state.get("language", "العربية")
-    active_dict = LOCALES_POOL.get(current_lang, LOCALES_POOL["العربية"])
-    return active_dict.get(key_code, key_code)
+    
+    # 1. If the selection is "EN", bypass the cloud API and pass the text instantly for maximum speed
+    if current_lang == "EN":
+        return english_text
+        
+    # 2. Map the interface labels to the official international ISO language codes
+    target_iso_code = "ar" if current_lang == "العربية" else "ckb"
+    
+    # 3. [The Automated Pipeline] Ingest the English text and fetch the instant translation from the cloud
+    try:
+        # Utilizing deep-translator to securely fetch the localized string in real-time
+        translated_result = GoogleTranslator(source='en', target=target_iso_code).translate(english_text)
+        return translated_result if translated_result else english_text
+    except Exception:
+        # Fallback safeguard: if the cloud network times out, display the original English key to prevent app crashes
+        return english_text
