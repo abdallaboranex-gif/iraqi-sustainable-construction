@@ -1,30 +1,48 @@
 import streamlit as st
 from deep_translator import GoogleTranslator
 
-def get_text(english_text):
+@st.cache_data(show_spinner=False, max_entries=1000, ttl=86400)
+def fetch_cached_translation(text: str, target_lang: str) -> str:
     """
-    Pure English Internationalization Middleware.
-    This module contains ZERO hardcoded Arabic or Kurdish words [١.١].
-    It translates the entire app dynamically from English into Arabic/Kurdish via Cloud API [١.١].
+    Isolated In-Memory Cache Core.
+    Intercepts dynamic translator requests and preserves tokens in server RAM.
+    Eliminates repetitive HTTP network requests and stops page latency loops.
     """
-    if not english_text:
-        return ""
-        
-    # Read the current language selection directly from the header widget ("العربية", "كردي", "EN")
-    current_lang = st.session_state.get("language", "العربية")
-    
-    # 1. If the selection is "EN", bypass the cloud API and pass the text instantly for maximum speed
-    if current_lang == "EN":
-        return english_text
-        
-    # 2. Map the interface labels to the official international ISO language codes
-    target_iso_code = "ar" if current_lang == "العربية" else "ckb"
-    
-    # 3. [The Automated Pipeline] Ingest the English text and fetch the instant translation from the cloud
     try:
-        # Utilizing deep-translator to securely fetch the localized string in real-time
-        translated_result = GoogleTranslator(source='en', target=target_iso_code).translate(english_text)
-        return translated_result if translated_result else english_text
+        # Secure automated single text translation via heavy global pipeline
+        translated = GoogleTranslator(source='en', target=target_lang).translate(text)
+        return translated if translated else text
     except Exception:
-        # Fallback safeguard: if the cloud network times out, display the original English key to prevent app crashes
-        return english_text
+        # Absolute structural fail-safe fallback to prevent platform crash
+        return text
+
+def get_text(english_key: str) -> str:
+    """
+    Universal Localization Engine Middleware.
+    Strictly follows the Iraqi Green Construction Data Platform architecture:
+    - 100% Pure Standard English keys processed dynamic on-the-fly [1.1]
+    - Zero static dictionary clutter or hardcoded manual arrays [1.1]
+    - Dynamic session switching between Arabic (العربية) and Kurdish (كردي) [1.1]
+    - Wrapped around fetch_cached_translation to deliver instant zero-lag rendering [1.1]
+    """
+    # Safeguard 1: Safe fallback if session state variables are momentarily uninitialized
+    if "language" not in st.session_state:
+        return english_key
+
+    selected_language = st.session_state.language
+
+    # Structural mapping matrix to convert platform session choices to ISO-639 codes
+    if selected_language == "العربية":
+        target_iso = "ar"
+    elif selected_language == "كردي":
+        target_iso = "ku"
+    else:
+        # Fallback benchmark for pure English or unrecognized language configurations
+        return english_key
+
+    # Safeguard 2: Instantly bypass empty keys or whitespace inputs to protect network socket
+    if not english_key.strip():
+        return english_key
+
+    # Trigger the highly accelerated cached memory query engine
+    return fetch_cached_translation(text=english_key, target_lang=target_iso)
