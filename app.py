@@ -1,3 +1,12 @@
+import os
+import sys
+
+# Core Architectural Fix: Enforce project root injection into Python search path
+# This strictly resolves the Streamlit Cloud Linux relative import pipeline exceptions
+project_root = os.path.dirname(os.path.abspath(__file__))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 import streamlit as st
 
 # Enforce Sovereign Layout Configuration at the absolute application execution entrypoint
@@ -18,8 +27,8 @@ def main():
     """
     Main Executive Entrypoint for the Iraqi Green Construction Data Platform.
     Strictly follows the platform design rules:
-    - 100% Pure Standard English keys passed to get_text() [1.1]
-    - Direct integration with core/router.py to enforce absolute separation of concerns [1.1]
+    - 100% Pure Standard English keys passed to get_text()
+    - Direct integration with core/router.py to enforce absolute separation of concerns
     - Premium light-theme high-contrast visualization elements (#0F172A navy elements)
     """
     
