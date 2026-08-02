@@ -4,61 +4,63 @@ from utils.localization import get_text
 
 def render_portal_1():
     """
-    واجهة الباب الأول المطهرة بالكامل والمربوطة بالمقبض اللغوي الموحد.
-    تفتح بيضاء وفارغة تماماً وتترجم كافة الحقول الـ 13 ديناميكياً [١.١].
+    Sovereign Portal 1 Component.
+    100% Pure English source code. Completely purged of any hardcoded Arabic or Kurdish words [١.١].
+    Pulls automated real-time translations for all 13 blanks and structural inputs [١.١].
     """
-    # ربط العنوان والشرح بدالة get_text لتتغير فورا مع لغة المتصفح
-    st.markdown(f"<h2 style='color: #1D4ED8; font-size: 22px; margin-bottom: 5px; font-weight: 800;'>{get_text('title_p1')}</h2>", unsafe_allow_html=True)
-    st.markdown(f"<p style='color: #0F172A; font-size: 13px;'>{get_text('desc_p1')}</p>", unsafe_allow_html=True)
+    # Main header and description synchronized with the cloud translation engine
+    st.markdown(f"<h2 style='color: #1D4ED8; font-size: 22px; margin-bottom: 5px; font-weight: 800;'>{get_text('Portal 1: Site Analysis & Municipal Constraints')}</h2>", unsafe_allow_html=True)
+    st.markdown(f"<p style='color: #0F172A; font-size: 13px;'>{get_text('Please fill out the 13 fields accurately to determine soil test and mandatory codes.')}</p>", unsafe_allow_html=True)
     
     with st.container(border=True):
-        st.markdown("<h4 style='color: #0F172A; font-size: 15px; margin-bottom: 15px;'>📍 البيانات الجغرافية والإدارية</h4>", unsafe_allow_html=True)
+        st.markdown(f"<h4 style='color: #0F172A; font-size: 15px; margin-bottom: 15px;'>{get_text('Geographic & Administrative Data')}</h4>", unsafe_allow_html=True)
         
         c1, c2, c3 = st.columns(3)
         with c1:
-            gov = st.selectbox(get_text("lbl_gov"), ["", "بغداد", "نينوى", "البصرة", "أربيل", "صلاح الدين", "الأنبار", "بابل", "النجف"], index=0)
+            # The selectbox opens blank, enforcing fresh user interaction
+            gov = st.selectbox(get_text("1. Governorate"), ["", "Baghdad", "Nineveh", "Basra", "Erbil", "Salah Al-Din", "Anbar", "Babylon", "Najaf"], index=0)
         with c2:
-            district = st.text_input(get_text("lbl_district"), placeholder="مثال: الكرخ / المنصور", value="")
+            district = st.text_input(get_text("2. District / Sub-district"), placeholder="e.g. Al-Mansour", value="")
         with c3:
-            zoning = st.selectbox(get_text("lbl_zoning"), ["", "سكني صرف", "تجاري", "صناعي", "زراعي مشمول", "حكومي / خدمي"], index=0)
+            zoning = st.selectbox(get_text("3. Land Zoning Type (Municipality)"), ["", "Pure Residential", "Commercial", "Industrial", "Agricultural Included", "Governmental / Service"], index=0)
             
         c4, c5, c6 = st.columns(3)
         with c4:
-            plot_num = st.text_input(get_text("lbl_plot"), placeholder="مثال: 4/12 م10 داوودي", value="")
+            plot_num = st.text_input(get_text("4. Plot & Sector Number"), placeholder="e.g. 4/12 Dawoodi", value="")
         with c5:
-            total_area = st.number_input(get_text("lbl_area"), min_value=0.0, value=0.0, step=10.0)
+            total_area = st.number_input(get_text("5. Total Land Area (sqm)"), min_value=0.0, value=0.0, step=10.0)
         with c6:
-            built_area = st.number_input(get_text("lbl_built_area"), min_value=0.0, value=0.0, step=10.0)
+            built_area = st.number_input(get_text("6. Built-up Footprint Area (sqm)"), min_value=0.0, value=0.0, step=10.0)
 
         st.markdown("<hr style='border-color: #CBD5E1; margin: 20px 0;'>", unsafe_allow_html=True)
-        st.markdown("<h4 style='color: #0F172A; font-size: 15px; margin-bottom: 15px;'>🏗️ المحددات الإنشائية والكتلة المعمارية</h4>", unsafe_allow_html=True)
+        st.markdown(f"<h4 style='color: #0F172A; font-size: 15px; margin-bottom: 15px;'>{get_text('Structural Constraints & Building Mass')}</h4>", unsafe_allow_html=True)
         
         c7, c8, c9 = st.columns(3)
         with c7:
-            floors = st.number_input(get_text("lbl_floors"), min_value=0, max_value=60, value=0)
+            floors = st.number_input(get_text("7. Total Number of Floors"), min_value=0, max_value=60, value=0)
         with c8:
-            building_height = st.number_input(get_text("lbl_height"), min_value=0.0, value=0.0, step=0.5)
+            building_height = st.number_input(get_text("8. Total Building Height (meters)"), min_value=0.0, value=0.0, step=0.5)
         with c9:
-            basement = st.selectbox(get_text("lbl_basement"), ["", "لا يحتوي", "سرداب واحد", "متعدد الطوابق تحت الأرض"], index=0)
+            basement = st.selectbox(get_text("9. Does the building contain a basement?"), ["", "No Basement", "Single Basement", "Multi-Level Underground"], index=0)
 
         c10, c11, c12 = st.columns(3)
         with c10:
-            front_offset = st.number_input(get_text("lbl_offset_f"), min_value=0.0, value=0.0, step=0.5)
+            front_offset = st.number_input(get_text("10. Legal Front Offset (meters)"), min_value=0.0, value=0.0, step=0.5)
         with c11:
-            side_offset = st.number_input(get_text("lbl_offset_s"), min_value=0.0, value=0.0, step=0.5)
+            side_offset = st.number_input(get_text("11. Side and Rear Offsets (meters)"), min_value=0.0, value=0.0, step=0.5)
         with c12:
-            adjacent_buildings = st.selectbox(get_text("lbl_adjacent"), ["", "مباني سكنية خفيفة", "هياكل كونكريتية ضخمة", "أرض فضاء / ساحة"], index=0)
+            adjacent_buildings = st.selectbox(get_text("12. Type of Adjacent Buildings"), ["", "Light Residential", "Heavy Concrete Structures", "Open Space / Vacant Land"], index=0)
 
         st.markdown("<br>", unsafe_allow_html=True)
-        structural_system = st.selectbox(get_text("lbl_structure"), ["", "هيكل خرساني مسلّح", "جدران حاملة", "هيكل حديدي", "مختلط / خاص"], index=0)
+        structural_system = st.selectbox(get_text("13. Proposed Structural System"), ["", "Reinforced Concrete Frame", "Load-Bearing Walls", "Steel Structure", "Mixed / Special System"], index=0)
+
         st.markdown("<br>", unsafe_allow_html=True)
-        # ربط اسم زر التشغيل بالقاموس الموحد ليتغير لحظياً حسب اللغة المختارة
-        submit_filter = st.button(get_text("btn_trigger_compliance"), use_container_width=True)
+        submit_filter = st.button(get_text("Trigger Instant Compliance Engine"), use_container_width=True)
         
         if submit_filter:
-            # صمام أمان حازم ومنظف لمنع الضغط والتشغيل على حقول فارغة أو بقيمة صفر
+            # Rigid safeguard preventing code execution on blank or uninitialized elements
             if not gov or not district or not zoning or total_area == 0.0 or floors == 0:
-                st.warning(get_text("warning_empty_fields"))
+                st.warning(get_text("Please fill out all 13 fields first!"))
             else:
                 st.session_state.property_data["governorate"] = gov
                 st.session_state.property_data["district"] = district
@@ -72,18 +74,16 @@ def render_portal_1():
                 st.markdown("<br><hr style='border-color: #CBD5E1;'>", unsafe_allow_html=True)
                 
                 if result["status"]:
-                    # عرض رسالة النجاح الخضراء المترجمة من القاموس الموحد
-                    st.success(get_text("success_msg"))
-                    with st.expander("🔍 بنود الفحص / Check Details"):
+                    st.success(get_text("✅ Analysis complete. The initial blueprint complies with all restrictions."))
+                    with st.expander("🔍 Inspection Clauses / Check Details"):
                         for log in result["logs"]:
                             st.markdown(f"<span style='color: #10B981; font-weight:700;'>{log}</span>", unsafe_allow_html=True)
                 else:
-                    # عرض رسالة المخالفة الحمراء الصارمة المترجمة من القاموس
-                    st.error(get_text("error_msg"))
-                    with st.expander("🚨 سجل الخرق القانوني / Violations Log", expanded=True):
+                    st.error(get_text("❌ Explicit violations detected against municipal zoning and national codes!"))
+                    with st.expander("🚨 Violations Log", expanded=True):
                         for error in result["errors"]:
                             st.markdown(f"<span style='color: #EF4444; font-weight: 700;'>{error}</span>", unsafe_allow_html=True)
                             
                 from core.state_manager import log_action
-                log_action(user=st.session_state.user_identity.get("full_name", "Anonymous"), action_details=f"شغّل محرك المطابقة لـ {gov}، النتيجة: {result['status']}")
+                log_action(user=st.session_state.user_identity.get("full_name", "Anonymous"), action_details=f"Triggered site audit engine for {gov}, Result Status: {result['status']}")
                 st.rerun()
