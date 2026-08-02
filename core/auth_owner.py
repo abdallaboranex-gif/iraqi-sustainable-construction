@@ -1,15 +1,12 @@
-import streamlit as st
-import random
-from utils.localization import get_text
-from core.state_manager import log_action
-
 def generate_owner_otp():
     """
-    توليد رمز تحقق حركي مؤقت مكون من 6 أرقام وحفظه في ذاكرة الجلسة الآمنة.
+    [تصحيح هندسي حاسم لثبات الجلسة]
+    توليد رمز التحقق وحفظه بقفل أمان يمنع إعادة التوليد الصامتة عند ضغط الأزرار.
     """
-    otp_code = str(random.randint(100000, 999999))
-    st.session_state.owner_otp_secret = otp_code
-    return otp_code
+    if "owner_otp_secret" not in st.session_state:
+        otp_code = str(random.randint(100000, 999999))
+        st.session_state.owner_otp_secret = otp_code
+    return st.session_state.owner_otp_secret
 
 def verify_owner_credentials(username, password):
     """
