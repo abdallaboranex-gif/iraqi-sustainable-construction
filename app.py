@@ -26,9 +26,9 @@ def main():
     """
     Main Executive Entrypoint for the Iraqi Green Construction Data Platform.
     Strictly follows the platform design rules:
-    - 100% Pure Standard English keys passed to get_text()
-    - Simplified visual titles: Extracted portal prefixes and word 'Portal' [image_8Qvxe9.png]
-    - Premium light-theme high-contrast visualization elements (#0F172A navy elements)
+    - 100% Pure Standard English keys passed to get_text() [1.1]
+    - Aligned with official Iraqi sovereign nomenclature directives [image_8Qvxe9.png]
+    - High-contrast bold typography styling overrides (#0F172A navy text elements)
     """
     
     # 1. Initialize global state variables (language management and session locking)
@@ -83,15 +83,15 @@ def main():
     with st.sidebar:
         st.markdown(f'<div class="sidebar-title">🧭 {get_text("Platform Navigation")}</div>', unsafe_allow_html=True)
         
-        # Pure Mapping Matrix completely simplified to clear numeric labels and words [image_8Qvxe9.png]
+        # Mapping matrix updated according to structural name modifications [image_8Qvxe9.png]
         navigation_options = {
             f"📊 {get_text('Main Dashboard')}": "Main Dashboard",
-            f"🧱 {get_text('Base Compliance')}": "Portal 1: Base Compliance",
-            f"🌱 {get_text('Sustainability')}": "Portal 2: Sustainability",
-            f"📈 {get_text('Data Aggregator')}": "Portal 3: Data Aggregator",
-            f"🗺️ {get_text('GIS Spatial Map')}": "Portal 4: GIS Spatial Map",
-            f"🏗️ {get_text('Sustainable Infrastructure')}": "Portal 5: Sustainable Infrastructure",
-            f"🛡️ {get_text('Site Safety')}": "Portal 6: Site Safety"
+            f"🧱 {get_text('Engineering Code Compliance Audits')}": "Portal 1: Base Compliance",
+            f"🌱 {get_text('Energy Management & Sustainability')}": "Portal 2: Sustainability",
+            f"📈 {get_text('Environmental Data Hub Centre')}": "Portal 3: Data Aggregator",
+            f"🗺️ {get_text('Geospatial Telemetry Control Controls')}": "Portal 4: GIS Spatial Map",
+            f"🏗️ {get_text('Sovereign Subscription & Digital Subscriptions')}": "Portal 5: Sustainable Infrastructure",
+            f"🛡️ {get_text('Occupational Health & Environmental Shield')}": "Portal 6: Site Safety"
         }
         
         # Calculate current visible key to keep select box state locked correctly upon reruns
