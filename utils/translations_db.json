@@ -11,5 +11,16 @@
     "Current Location": "الموقع الحالي",
     "Unregistered Account": "حساب غير مسجل",
     "Click to Verify Identity": "اضغط للتحقق من الهوية",
-    "Close & Return": "إغلاق والعودة"
+    "Close & Return": "إغلاق والعودة",
+    "Environmental monitoring and network logs.": "مراقبة البيئة وسجلات الشبكة.",
+    "Time & Date": "الوقت والتاريخ",
+    "Current Time": "الوقت الحالي",
+    "Current Date": "التاريخ الحالي",
+    "Weather": "الطقس",
+    "Temperature": "درجة الحرارة",
+    "Humidity": "الرطوبة",
+    "Wind Speed": "سرعة الرياح",
+    "Network Status": "حالة الشبكة",
+    "Server Latency": "زمن استجابة السيرفر",
+    "System Active: Monitoring entry logs.": "النظام نشط: جاري مراقبة البيانات."
 }
