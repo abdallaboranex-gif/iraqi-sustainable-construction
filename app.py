@@ -22,7 +22,7 @@ from core.router import navigate_to
 from utils.localization import get_text
 from components.header import render_header
 
-# Import all portal renders for direct left-hand injection
+# Import all portal renders for direct structural injection
 from views.main_dashboard import render_main_dashboard
 from views.portal_1_compliance import render_portal_1_compliance
 from views.portal_2_sustainability import render_portal_2_sustainability
@@ -34,7 +34,7 @@ from views.portal_6_site_safety import render_portal_6_site_safety
 def render_split_active_portal():
     """
     Sub-router execution engine that injects the selected input portal 
-    strictly inside the left-hand column frame context.
+    strictly inside the right-hand column frame context.
     """
     active_page = st.session_state.current_page
     
@@ -51,15 +51,14 @@ def render_split_active_portal():
     elif active_page == "Portal 6: Site Safety":
         render_portal_6_site_safety()
     else:
-        # If Main Dashboard itself is chosen, show a welcoming notification in the input frame
         st.info(get_text("System Baseline Active: Select an analytical compliance portal from navigation to initiate data log inputs."))
 
 def main():
     """
     Main Executive Entrypoint for the Iraqi Green Construction Data Platform.
-    Strictly coordinates the Split-Screen Architecture:
-    - Left Column (45%): Dynamic Input Canvas Portals
-    - Right Column (55%): Fixed Telemetry Dashboard Panel & Core Analytics Matrix
+    Strictly coordinates the Reversed Split-Screen Architecture:
+    - Left Column (40%): Fixed Telemetry Dashboard Panel & Core Analytics Matrix
+    - Right Column (60%): Dynamic Input Canvas Portals (Aligned for localized engineering view)
     """
     
     # 1. Initialize global state variables (language management and session locking)
@@ -148,17 +147,17 @@ def main():
                 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 5. CORE SPLIT-SCREEN GRID CONFIGURATION (Pure Streamlit Architecture)
-    # Allocating 4.5 ratio units to Inputs Canvas, and 5.5 ratio units to Live Telemetry
-    col_input_canvas, col_live_telemetry = st.columns([4.5, 5.5], gap="large")
+    # 5. REVERSED SOVEREIGN SPLIT-SCREEN GRID CONFIGURATION (Pure Streamlit Architecture)
+    # Allocating 4.0 units to Left Telemetry View and 6.0 units to Right Inputs Canvas (60% Size Ratio)
+    col_live_telemetry, col_input_canvas = st.columns([4.0, 6.0], gap="large")
     
-    # LEFT PANEL FRAME (45%): Dynamic Input Portals Context
-    with col_input_canvas:
-        render_split_active_portal()
-        
-    # RIGHT PANEL FRAME (55%): Fixed Live Dashboard Metrics Monitors Global Track
+    # LEFT PANEL FRAME (40%): Fixed Live Dashboard Metrics Monitors Global Track
     with col_live_telemetry:
         render_main_dashboard()
+        
+    # RIGHT PANEL FRAME (60%): Dynamic Input Portals Context
+    with col_input_canvas:
+        render_split_active_portal()
 
 if __name__ == "__main__":
     main()
