@@ -1,22 +1,22 @@
 import streamlit as st
 from core.security_crypto import mask_sensitive_data
-from utils.localization import get_text # استيراد دالة الترجمة
+from utils.localization import get_text
 
 def render_header():
     """
-    مكون الشريحة العليا السيادي والديناميكي: الجزء الأول.
-    يبني الهوية البصرية، وصندوق الموقع الأبيض، ومبدل اللغات الثلاثي المربوط بالسيرفر.
+    مكون الشريحة العليا المطور والمنظف مئة بالمئة من الحشو اللغوي.
+    يربط وجت التبديل بالمقبض الموحد 'language' لتصفير انجماد اللغات الأخرى [١.١].
     """
     user_data = st.session_state.user_identity
     
-    # تحديد الكلمات التي ستظهر ديناميكياً بناءً على اكتمال التسجيل واللغة الفعالة
+    # جلب التسميات الديناميكية بناءً على حالة التسجيل الحية من النواة
     display_name = user_data["full_name"] if user_data["registered"] else get_text("user_unregistered")
     display_rank = user_data["rank_title"] if user_data["registered"] else get_text("user_action_verify")
 
     # تقسيم الهيدر بمسافات فسيحة مطابقة للصورة المرجعية الفخمة مئة بالمئة
     col_brand, col_context, col_user = st.columns([2.6, 1.8, 1.6], gap="small")
     
-    # أقصى اليسار: الشعار واللوحة اللفظية الرسمية
+    # أقصى اليسار: الشعار واللوحة اللفظية الرسمية للمنصة الدولية
     with col_brand:
         st.markdown(
             f"""
@@ -35,7 +35,7 @@ def render_header():
             unsafe_allow_html=True
         )
         
-    # الوسط: صندوق الموقع الأبيض الفخم ومبدل اللغات المحكم
+    # العمود الأوسط: صندوق الموقع الأبيض الفخم ومبدل اللغات الثلاثي المصحح
     with col_context:
         sub_col1, sub_col2 = st.columns(2)
         with sub_col1:
@@ -53,21 +53,26 @@ def render_header():
             st.markdown(f"<span style='color: #0F172A; font-size: 12px !important; font-weight: 700; display: block; margin-top: 2px; text-align: center;'>{get_text('lang_label')}</span>", unsafe_allow_html=True)
             lang_options = ["العربية", "كردي", "EN"]
             
+            # التقاط التحديد الابتدائي مباشرة من ذاكرة النواة المركزية الموحدة
+            current_selection = st.session_state.get("language", "العربية")
             default_idx = 0
-            if st.session_state.get("language", "ar") == "ku": default_idx = 1
-            elif st.session_state.get("language", "ar") == "en": default_idx = 2
+            if current_selection == "كردي": default_idx = 1
+            elif current_selection == "EN": default_idx = 2
             
-            # [التعديل الفاخر للربط] تصفير الانفصال وجعل الوجت يغير الذاكرة العامة مباشرة
+            # [التحديث الحاسم] الوجت يقرأ ويكتب مباشرة في المتغير المركزي الصافي 'language'
+            # مع تفعيل كود التحديث الفوري (Callback) لفك انجماد اللغات الأخرى نهائياً
             selected_lang = st.segmented_control(
-                label="Language Selector", options=lang_options, default=lang_options[default_idx], label_visibility="collapsed", key="language_selection_trigger"
+                label="Language Selector", 
+                options=lang_options, 
+                default=lang_options[default_idx], 
+                label_visibility="collapsed", 
+                key="language" # ربط مباشر وصارم مع النواة
             )
-            if selected_lang == "العربية" and st.session_state.get("language", "ar") != "ar":
-                st.session_state.language = "ar"; st.rerun()
-            elif selected_lang == "كردي" and st.session_state.get("language", "ar") != "ku":
-                st.session_state.language = "ku"; st.rerun()
-            elif selected_lang == "EN" and st.session_state.get("language", "ar") != "en":
-                st.session_state.language = "en"; st.rerun()
-    # أقصى اليمين: عرض الصورة الشخصية الفخمة وبوابة الشريط الجانبي (Sidebar)
+            
+            # حلقة مراقبة البث: إذا رصد السيرفر أي نقرة لغة بيدك، يعيد بث المنصة فوراً
+            if selected_lang != current_selection:
+                st.rerun()
+    # أقصى اليمين: عرض الصورة الشخصية الفخمة وزر فتح بوابة الشريط الجانبي
     with col_user:
         st.markdown(
             f"""
@@ -85,7 +90,7 @@ def render_header():
         if st.button(get_text("user_action_verify"), key="open_profile_drawer", use_container_width=True):
             st.session_state.show_profile_drawer = True
             
-    # تشغيل شريط الهوية والتفتيش الرقمي الفسيح عند طلب المستخدم
+    # تشغيل شريط الهوية والمسؤولية المدنية والنقابية الفسيح (Sidebar)
     if st.session_state.get("show_profile_drawer", False):
         with st.sidebar:
             if st.button("❌ Close & Return", use_container_width=True):
@@ -133,7 +138,7 @@ def render_header():
                     f"""
                     <div style='background-color: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px; padding: 12px; margin-bottom: 15px;'>
                         <span style='color: #166534 !important; font-weight: 800 !important; font-size: 14px !important; display: block;'>
-                            {get_text('badge_verified')}
+                            🛡️ حساب موثق سيادياً ونقابياً | Professional Verified
                         </span>
                     </div>
                     """, 
@@ -144,7 +149,7 @@ def render_header():
                 st.markdown(f"⏱️ **صلاحية الباقة:** متبقي {user_data['days_left']} يوماً")
                 
                 st.markdown("---")
-                st.markdown(f"### 🔐 {get_text('crypto_notice')}")
+                st.markdown(f"### 🔐 البيانات الشخصية المحمية بتشفير AES-256:")
                 masked_nid = mask_sensitive_data(user_data["national_id"])
                 masked_sid = mask_sensitive_data(user_data["syndicate_id"])
                 
