@@ -34,11 +34,13 @@ from views.portal_6_site_safety import render_portal_6_site_safety
 def render_split_active_portal():
     """
     Sub-router execution engine that injects the selected input portal 
-    strictly inside the right-hand column frame context.
+    strictly inside the right-hand column frame context (60% width).
+    Enforces Portal 1 as the default view when Main Dashboard is active.
     """
     active_page = st.session_state.current_page
     
-    if active_page == "Portal 1: Base Compliance":
+    # Enforce Portal 1 inputs dynamically as the default view on initialization
+    if active_page == "Main Dashboard" or active_page == "Portal 1: Base Compliance":
         render_portal_1_compliance()
     elif active_page == "Portal 2: Sustainability":
         render_portal_2_sustainability()
@@ -50,15 +52,13 @@ def render_split_active_portal():
         render_portal_5_infrastructure()
     elif active_page == "Portal 6: Site Safety":
         render_portal_6_site_safety()
-    else:
-        st.info(get_text("System Baseline Active: Select an analytical compliance portal from navigation to initiate data log inputs."))
 
 def main():
     """
     Main Executive Entrypoint for the Iraqi Green Construction Data Platform.
     Strictly coordinates the Reversed Split-Screen Architecture:
     - Left Column (40%): Fixed Telemetry Dashboard Panel & Core Analytics Matrix
-    - Right Column (60%): Dynamic Input Canvas Portals (Aligned for localized engineering view)
+    - Right Column (60%): Dynamic Input Canvas Portals (Portal 1 by default)
     """
     
     # 1. Initialize global state variables (language management and session locking)
@@ -113,7 +113,7 @@ def main():
     with st.sidebar:
         st.markdown(f'<div class="sidebar-title">🧭 {get_text("Platform Navigation")}</div>', unsafe_allow_html=True)
         
-        # Hard-locked options mapping matrix to ensure strict alignment with core dictionary keys
+        # Hard-locked options mapping matrix relying on clean Single-Word tokens matched to JSON keys
         navigation_options = {
             f"📊 {get_text('Main Dashboard')}": "Main Dashboard",
             f"🧱 {get_text('Compliance Audits')}": "Portal 1: Base Compliance",
@@ -155,7 +155,7 @@ def main():
     with col_live_telemetry:
         render_main_dashboard()
         
-    # RIGHT PANEL FRAME (60%): Dynamic Input Portals Context
+    # RIGHT PANEL FRAME (60%): Dynamic Input Portals Context (Portal 1 loads automatically)
     with col_input_canvas:
         render_split_active_portal()
 
