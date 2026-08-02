@@ -1,6 +1,7 @@
 import streamlit as st
 from utils.localization import get_text
-from components.user_profile import render_user_profile_tabs
+# [تحديث المسار] ربط الهيدر بملف التجميع في موقعه الجديد داخل مجلد البروفايل الفرعي
+from components.profile.user_profile import render_user_profile_tabs
 
 def handle_language_switch():
     """
