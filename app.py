@@ -27,7 +27,7 @@ def main():
     Main Executive Entrypoint for the Iraqi Green Construction Data Platform.
     Strictly follows the platform design rules:
     - 100% Pure Standard English keys passed to get_text()
-    - Dynamic injection of ultra-modern, high-contrast dark navy typography & Remix Icons
+    - High-contrast typography & safe structural modern navigation component
     """
     
     # 1. Initialize global state variables (language management and session locking)
@@ -36,14 +36,11 @@ def main():
     # 2. Render Global Sovereign Top Header & Digital ID sidebar
     render_header()
     
-    # 3. Inject Remix Icon CDN and premium dark-contrast sidebar typography styles
+    # 3. Inject premium dark-contrast sidebar typography styles and bolding overrides
     st.markdown(
         """
-        <!-- Load modern pixel-perfect icons family -->
-        <link href="https://jsdelivr.net" rel="stylesheet">
-        
         <style>
-        /* Force high-contrast dark navy black style across text fields */
+        /* Force ultra-deep high-contrast navy typography across text fields */
         [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
             color: #0F172A !important;
             font-weight: 800 !important;
@@ -56,54 +53,25 @@ def main():
         
         .sidebar-title {
             color: #0F172A !important;
-            font-size: 18px;
+            font-size: 19px;
             font-weight: 800;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             padding-bottom: 12px;
             border-bottom: 2px solid #F1F5F9;
         }
         
-        /* Modern Button Facelift - Darker Typography & Premium Interaction Dynamics */
-        div.stButton > button {
-            width: 100% !important;
-            text-align: left !important;
-            margin-bottom: 6px !important;
-            border-radius: 10px !important;
-            padding: 10px 14px !important;
-            font-size: 14px !important;
-            font-weight: 700 !important; /* Thick sharp elements */
-            color: #0F172A !important; /* Deepest High-Contrast Navy */
-            border: 1px solid #E2E8F0 !important;
+        /* Modern Select Option Facelift - Darker Typography & Premium Interaction */
+        div[data-baseweb="select"] > div {
+            border-radius: 12px !important;
+            border: 1px solid #CBD5E1 !important;
+            padding: 4px !important;
             background-color: #F8FAFC !important;
-            transition: all 0.2s ease-in-out !important;
         }
         
-        /* Hover properties for active states */
-        div.stButton > button:hover {
-            border-color: #1D4ED8 !important;
-            background-color: #EFF6FF !important;
-            color: #1D4ED8 !important;
-            transform: translateX(2px);
-        }
-        
-        /* Smooth visual identifier for the actively selected viewport page */
-        div.stButton button[p_is_active="true"], 
-        div.stButton > button:active,
-        div.stButton > button:focus {
-            background-color: #0F172A !important; /* Premium Dark Sovereign Navy background */
-            color: #FFFFFF !important; /* Crisp high contrast white text */
-            border-color: #0F172A !important;
-            box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.15) !important;
-        }
-        
-        /* Helper utility to handle inline alignment of icons next to text elements */
-        .nav-link-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .nav-link-wrapper i {
-            font-size: 18px;
+        div[data-baseweb="select"] * {
+            color: #0F172A !important; /* Thick sharp elements */
+            font-weight: 700 !important;
+            font-size: 14px !important;
         }
         </style>
         """,
@@ -112,33 +80,43 @@ def main():
     
     # 4. Construct the Sovereign Sidebar Platform Navigation Control Panel
     with st.sidebar:
-        st.markdown(f'<div class="sidebar-title"><i class="ri-compass-3-fill"></i> {get_text("Platform Navigation")}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="sidebar-title">🧭 {get_text("Platform Navigation")}</div>', unsafe_allow_html=True)
         
-        # Mapping matrix matching the router keys exactly, upgraded with slick 2026 Remix Icons
-        navigation_map = [
-            ("Main Dashboard", "ri-dashboard-3-line"),
-            ("Portal 1: Base Compliance", "ri-building-4-line"),
-            ("Portal 2: Sustainability", "ri-leaf-line"),
-            ("Portal 3: Data Aggregator", "ri-bar-chart-box-line"),
-            ("Portal 4: GIS Spatial Map", "ri-map-pin-range-line"),
-            ("Portal 5: Sustainable Infrastructure", "ri-tools-line"),
-            ("Portal 6: Site Safety", "ri-shield-cross-line")
-        ]
+        # Dictionary Mapping matching the exact english router navigation keys
+        navigation_options = {
+            f"📊 {get_text('Main Dashboard')}": "Main Dashboard",
+            f"🧱 {get_text('Portal 1: Base Compliance')}": "Portal 1: Base Compliance",
+            f"🌱 {get_text('Portal 2: Sustainability')}": "Portal 2: Sustainability",
+            f"📈 {get_text('Portal 3: Data Aggregator')}": "Portal 3: Data Aggregator",
+            f"🗺️ {get_text('Portal 4: GIS Spatial Map')}": "Portal 4: GIS Spatial Map",
+            f"🏗️ {get_text('Portal 5: Sustainable Infrastructure')}": "Portal 5: Sustainable Infrastructure",
+            f"🛡️ {get_text('Portal 6: Site Safety')}": "Portal 6: Site Safety"
+        }
         
-        # Render high-contrast programmatic button array for seamless transition logs
-        for page_key, icon_class in navigation_map:
-            is_active = st.session_state.current_page == page_key
-            
-            # Construct a pixel-perfect HTML anchor structure inside the button label
-            button_label = f'<span class="nav-link-wrapper"><i class="{icon_class}"></i> {get_text(page_key)}</span>'
-            
-            if st.button(
-                label=button_label, 
-                key=f"nav_btn_{page_key.replace(' ', '_').lower()}",
-                # Passing secondary type to control state dynamically via custom CSS injection rules
-                type="secondary"
-            ):
-                navigate_to(page_key)
+        # Calculate current visible key to keep select box state locked correctly upon reruns
+        current_page_state = st.session_state.current_page
+        default_index = 0
+        
+        for idx, (display_label, internal_key) in enumerate(navigation_options.items()):
+            if internal_key == current_page_state:
+                default_index = idx
+                break
+                
+        # Premium unified selection menu container
+        selected_display_label = st.selectbox(
+            label="Navigation Switcher Matrix",
+            options=list(navigation_options.keys()),
+            index=default_index,
+            label_visibility="collapsed",
+            key="navigation_selectbox_trigger"
+        )
+        
+        # Map user input directly back to sovereign router keys safely
+        target_page_key = navigation_options[selected_display_label]
+        
+        # Route seamlessly if status selection drifts from current thread layout
+        if target_page_key != current_page_state:
+            navigate_to(target_page_key)
                 
     # 5. Delegate structural view rendering exclusively to the isolated routing module
     render_active_view()
